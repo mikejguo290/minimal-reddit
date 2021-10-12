@@ -91,49 +91,43 @@ code {
 }
 
 *{
+  /*
   border:1px solid red;
+  */
 }
 
 body {
-  background-color: #f3f3f3;
+  background-color: #fcfcfc;/* #fcfcfc #f3f3f3 #e6e6e6 #6f6f6f #717171 */
   min-width:320px;
 
 }
 
 main {
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-
+  display:grid;
+  grid-template-columns:1fr;
 }
 
 @media screen and (min-width: 768px){
   main {
+    grid-template-columns: 1fr 2fr 1fr;
     flex-direction:row;
     justify-content:flex-start;
     align-items:flex-start;
   }
   .feed {
-    flex-grow:1;
+    grid-column:1/3;
   }
-  .subredditsContainer{
-    flex-grow:0;
-  }
-}
-
-@media screen and (min-width: 1024px){
-  .feed {
-    flex-grow:3;
-  }
-  .subredditsContainer{
-    flex-grow:1;
-  }
+  
+  /* don't have to define grid-column for the other grid item - subredditsContainer! */
+  
 }
 
 header {
-  display: flex;
-  justify-content:space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   background-color:white;
+  box-shadow: 0 3px 10px 1px rgb(0 0 0 / 0.2);
+  padding: 1rem 0rem;
 }
 
 .brand {
@@ -141,25 +135,24 @@ header {
   justify-content:flex-start;
   align-items:center;
   margin-right:1.5rem;
-  margin-left:1rem;
+  margin-left:2rem;
 }
 
 .logo {
-  width:50px;
+  width:30px;
 }
 
 .appName {
   display:none;
+  margin-left:0.5em;
 }
 /* search bar component styling */ 
 .searchBar {
-  flex-grow:0.1;
   max-width: 700px;
   align-self: center;
+  background-color: #e6e6e6;
 }
-.empty { /* empty div that takes up space to help keep search bar center in this flex set up. */
-  width:50px;
-}
+
 @media screen and (min-width: 480px){
   .appName {
     display:block;
@@ -179,6 +172,8 @@ header {
   padding:0.5em;
   margin: 1em 0em;
   background-color:white;
+  box-shadow: 0px 2px 5px 5px #e6e6e6;
+  box-shadow: 0 3px 10px 1px rgb(0 0 0 / 0.2);
 }
 
 .postVotes {
@@ -201,6 +196,7 @@ header {
 /* subreddits Container*/  
 .subredditsContainer{
   margin:1em 0.5em;
+  box-shadow: 0 3px 10px 1px rgb(0 0 0 / 0.2);
 }
 /* subreddits */
 .subreddits {
@@ -212,5 +208,5 @@ header {
   padding:0.5em;
 }
 .subreddit figure {
-  width:50px;
+  width:30px;
 }

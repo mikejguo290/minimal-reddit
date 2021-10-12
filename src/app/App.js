@@ -13,8 +13,6 @@ function App() {
           <p class="appName">RedditMinimal</p>
         </div>
         <input class="searchBar" placeholder='Search'/>
-        <div class="empty">
-        </div>
       </header>
 
       <main>
