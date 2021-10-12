@@ -1,21 +1,13 @@
-import { Page } from '../pages/Page';
-
+import { Page } from '../components/Page';
+import { Search } from '../features/Search';
 import redditImage from '../images/reddit.jpeg' /* local imports */
 
 function App() {
   return (
     <>
-      <header>
-        <div class="brand">
-          <figure class="logo">
-            <img src={redditImage} alt="reddit favicon"/>
-          </figure>
-          <p class="appName">RedditMinimal</p>
-        </div>
-        <input class="searchBar" placeholder='Search'/>
-      </header>
-
-      <main>
+      <Search />
+      <Page /> {/* going to be subsituted for Homepage and others in a Router switch */}
+      <main>        
         <div className="feed">
           <div className="posts">
             {/* start of post */}
@@ -24,7 +16,7 @@ function App() {
                 <p>2k</p>
               </div>
               <div className="postContext">
-                <p>r/subreddit_name</p>
+                <p className="subRedditLink">r/subreddit_name</p>
                 <h3>Enter the Pics Halloween photo!</h3>
                 <p>Image or Intro Text</p>
                 <div className="postmetaData">
