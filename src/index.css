@@ -96,6 +96,21 @@ code {
 
 body {
   background-color: gainsboro;
+  min-width:320px;
+}
+
+main {
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  overflow-y:scroll;
+}
+
+@media screen and (min-width: 768px){
+  main {
+    flex-direction:row;
+    justify-content:flex-start;
+  }
 }
 
 header {
@@ -106,6 +121,7 @@ header {
 .brand {
   display:flex;
   justify-content:flex-start;
+  margin-right:1.5rem;
 }
 
 .logo {
@@ -115,6 +131,7 @@ header {
 .appName {
   display:none;
 }
+/* search bar component styling */ 
 .searchBar {
   flex-grow:1;
   max-width: 700px;
@@ -126,4 +143,50 @@ header {
   .appName {
     display:block;
   }
+}
+
+
+/* feed styling */ 
+.feed {
+  width:100%;
+}
+/* posts styling */
+.posts {
+  margin:0em 0.5em;
+}
+/* post styling */
+.post {
+  display:flex;
+  padding:0.5em;
+  margin: 1em 0em;
+}
+
+.postVotes {
+  min-width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.postContext {
+  flex-grow: 1;
+}
+
+.postmetaData {
+  display:flex;
+  justify-content:space-between;
+  padding:0.5em 0em 0.5em 1em;
+  border-top: solid 1px gray;
+}
+
+/* subreddits */  
+.subreddits{
+  margin:0em 0.5em;
+}
+/* subreddit */
+.subreddit {
+  display:flex;
+  padding:0.5em;
+}
+.subreddit img {
+  width:50px;
 }
