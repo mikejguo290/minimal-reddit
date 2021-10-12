@@ -25,7 +25,7 @@ function App() {
               </div>
               <div className="postContext">
                 <p>r/subreddit_name</p>
-                <h3>Title</h3>
+                <h3>Enter the Pics Halloween photo!</h3>
                 <p>Image or Intro Text</p>
                 <div className="postmetaData">
                   <p>author</p>
