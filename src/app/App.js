@@ -68,10 +68,32 @@ function App() {
                   <p>Posted time</p>
                   <p>Comments</p>
                 </div>
+                {/* start of comments */}
+                <div class="comments">
+                  <article class="comment">
+                    <div class="">
+                      <h4 class="commenter">Commenter</h4>
+                      <p class="commentText">Anything goes here.</p>
+                    </div>
+                    <div>
+                      <p>time</p>
+                    </div>
+                  </article>
+                  <article class="comment">
+                    <div class="">
+                      <h4 class="commenter">Commenter</h4>
+                      <p class="commentText">Something else goes here.</p>
+                    </div>
+                    <div>
+                      <p>time</p>
+                    </div>
+                  </article>
+                </div>
+                {/* end of comments */}
+
               </div>
             </div>
             {/* end of post */}
-
           </div>
 
         </div>
