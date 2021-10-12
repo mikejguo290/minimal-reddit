@@ -10,7 +10,7 @@ function App() {
           <figure class="logo">
             <img src={redditImage} alt="reddit favicon"/>
           </figure>
-          <p class="appName">Reddit Minimal</p>
+          <p class="appName">RedditMinimal</p>
         </div>
         <input class="searchBar" placeholder='Search'/>
         <div class="empty">
@@ -27,7 +27,7 @@ function App() {
               </div>
               <div className="postContext">
                 <p>r/subreddit_name</p>
-                <h3>Title here</h3>
+                <h3>Title</h3>
                 <p>Image or Intro Text</p>
                 <div className="postmetaData">
                   <p>author</p>
@@ -45,7 +45,7 @@ function App() {
               </div>
               <div className="postContext">
                 <p>r/subreddit_name</p>
-                <h3>Title here</h3>
+                <h3>Title</h3>
                 <p>Image or Intro Text</p>
                 <div className="postmetaData">
                   <p>Author</p>
@@ -55,9 +55,29 @@ function App() {
               </div>
             </div>
             {/* end of post */}
+
+            {/* start of post */}
+            <div className="post">
+              <div className="postVotes">
+                <p>2k</p>
+              </div>
+              <div className="postContext">
+                <p>r/subreddit_name</p>
+                <h3>Title</h3>
+                <p>Image or Intro Text</p>
+                <div className="postmetaData">
+                  <p>Author</p>
+                  <p>Posted time</p>
+                  <p>Comments</p>
+                </div>
+              </div>
+            </div>
+            {/* end of post */}
+
           </div>
+
         </div>
-        <section className="subredditsContainer">
+        <div className="subredditsContainer">
           <div className="subreddits">
             <h2>Subreddits</h2>
             <div className="subreddit">
@@ -75,7 +95,7 @@ function App() {
             </div>
 
           </div>
-        </section>
+        </div>
         
       </main>
     </>
