@@ -229,6 +229,10 @@ aside{
   background-color:white;
   padding: 1em;
 }
+
+.subreddits h2 {
+  margin-bottom:0.5em;
+}
 /* subreddit */
 .subreddit {
   display:flex;
