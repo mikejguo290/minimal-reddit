@@ -133,6 +133,9 @@ html {
     /* no need for grid-row here */
   }
   /* don't have to define grid-column for the other grid item - aside  */
+  aside {
+    align-self:start;
+  }
 }
 
 header {
