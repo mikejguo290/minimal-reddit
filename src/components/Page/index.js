@@ -1,5 +1,5 @@
 import redditImage from '../../images/reddit.jpeg' /* local imports */
-
+import { Subreddits } from '../../features/Subreddits';
 export function Page () {
     return (
         <>
@@ -87,23 +87,7 @@ export function Page () {
                 </div>
             </main>
             <aside>
-                <div className="subreddits">
-                    <h2>Subreddits</h2>
-                    <div className="subreddit">
-                        <figure>
-                            <img src={redditImage} alt='subreddit icon' />
-                        </figure>
-                        <h3>Javascript</h3>
-                    </div>
-
-                    <div className="subreddit">
-                        <figure>
-                            <img src={redditImage} alt='subreddit icon' />
-                        </figure>
-                        <h3>React</h3>
-                    </div>
-
-                </div>
+                <Subreddits />
             </aside>
         </>
     )
