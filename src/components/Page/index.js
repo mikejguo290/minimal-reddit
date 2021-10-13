@@ -3,10 +3,10 @@ import { Posts } from '../../features/Posts';
 import { Banner } from '../Banner';
 
 export function Page(props){
-
+    const subRedditName = 'webdev'
     return (
         <>  
-            {true && <Banner />}
+            {true && <Banner name={subRedditName}/>}
             <main>       
                 <div className="feed">
                     <Posts  />
