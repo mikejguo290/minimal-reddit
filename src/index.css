@@ -121,16 +121,22 @@ html {
   
   #root {
     grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows:4rem 1fr;
+    grid-template-rows:4rem auto 1fr; /* header, banner, main+aside */
   }
 
   header {
     grid-column: 1/4;
     grid-row: 1/2;
   }
+
+  .banner {
+    grid-column:1/4;
+    grid-row: 2/3;
+  }
+
   main {
     grid-column:1/3
-    /* no need for grid-row here */
+    /* no need for grid-row here both main and aside are in third row*/
   }
   /* don't have to define grid-column for the other grid item - aside  */
   aside {
@@ -175,7 +181,13 @@ header {
     display:block;
   }
 }
-
+/* .banner */
+.banner {
+  background-color:gainsboro;
+  padding: 0.5em;
+  margin-top: 1.5em;
+  text-align:center;
+}
 
 /* feed styling */ 
 
