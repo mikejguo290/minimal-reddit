@@ -1,5 +1,20 @@
 import redditImage from '../../images/reddit.jpeg' /* local imports */
+import { useState } from 'react';
 export function Search (){
+    const [ searchTerm, setSearchTerm ]=useState('');
+
+    const handleChange = (event) =>{
+        const userInput = event.target.value;
+        setSearchTerm(userInput);
+    }
+
+    const handleSubmit = (event) =>{
+        event.preventDefault();
+        if(searchTerm){
+            alert(searchTerm);
+        }
+    }
+
     return (
         <header>
             <div class="brand">
@@ -8,7 +23,9 @@ export function Search (){
             </figure>
             <p class="appName">RedditMinimal</p>
             </div>
-            <input class="searchBar" placeholder='Search'/>
+            <form onSubmit={handleSubmit}>
+                <input class="searchBar" placeholder='Search' value={searchTerm} onChange={handleChange} />
+            </form>
         </header>
     )
 }
