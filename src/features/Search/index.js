@@ -18,14 +18,14 @@ export function Search (){
 
     return (
         <header>
-            <div class="brand">
-            <figure class="logo">
+            <div className="brand">
+            <figure className="logo">
                 <img src={redditImage} alt="reddit favicon"/>
             </figure>
-            <p class="appName">RedditMinimal</p>
+            <p className="appName">RedditMinimal</p>
             </div>
             <form onSubmit={handleSubmit}>
-                <input class="searchBar" placeholder='Search' value={searchTerm} onChange={handleChange} />
+                <input className="searchBar" placeholder='Search' value={searchTerm} onChange={handleChange} />
             </form>
         </header>
     )
