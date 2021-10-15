@@ -1,13 +1,14 @@
 import { Page } from '../components/Page';
 import { Search } from '../features/Search';
-import redditImage from '../images/reddit.jpeg' /* local imports */
+import { BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
   return (
     <>
       <Search />
-      <Page /> {/* going to be subsituted for Homepage and others in a Router switch */}
-      
+      <Router>
+        <Page /> {/* going to be subsituted for Homepage and others in a Router switch */}
+      </Router>
     </>
   );
 }
