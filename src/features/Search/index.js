@@ -11,8 +11,9 @@ export function Search (){
     const handleSubmit = (event) =>{
         event.preventDefault();
         if(searchTerm){
-            alert(searchTerm);
+            console.log(searchTerm);
         }
+        setSearchTerm('');
     }
 
     return (
