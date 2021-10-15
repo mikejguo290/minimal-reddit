@@ -1,6 +1,7 @@
 import { Search } from '../features/Search';
 import { Homepage } from '../pages/Homepage';
 import { SubredditPage } from '../pages/SubredditPage';
+import { PostDetailsPage } from '../pages/PostDetailsPage';
 import { BrowserRouter as Router , Route, Switch } from 'react-router-dom';
 
 function App() {
@@ -9,6 +10,9 @@ function App() {
       <Search />
       <Router>
         <Switch>
+          <Route path="/r/:subreddit/comments/:postId">
+            <PostDetailsPage />
+          </Route>
           <Route path="/r/:subreddit">
             <SubredditPage />
           </Route>
