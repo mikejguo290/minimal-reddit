@@ -1,5 +1,5 @@
 import { Post } from '../../components/Post'
-export function Posts (){
+export function Posts (props){
     const post1 = {
         votes: 2000,
         subreddit:'r/javascript',
@@ -33,7 +33,7 @@ export function Posts (){
     const posts = [post1, post2, post3 ];
     return (
         <div className="posts">
-            {posts.map(post => <Post data={post} />)}
+            {posts.map(post => <Post data={post} pageType={props.pageType}/>)}
         </div>
     );
 }

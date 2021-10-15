@@ -15,7 +15,7 @@ export function Post(props){
     let page know if a request came in to view detailed Page view. this should be an attribute of a specific Post object.
     to allow for viewing comments in homepage or subreddit, without clicking through to PostDetail page.
     */
-    let postDetail = true; 
+    let isPostDetailView= props.pageType==="detail"; 
 
     return (
         <div className="post">
@@ -32,7 +32,7 @@ export function Post(props){
                     <p>Comments</p>
                 </div>
                 {/* start of comments */}
-                { postDetail && <Comments />}
+                { isPostDetailView && <Comments />}
                 {/* end of comments */}
             </div>
         </div>
