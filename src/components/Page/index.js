@@ -3,10 +3,13 @@ import { Posts } from '../../features/Posts';
 import { Banner } from '../Banner';
 
 export function Page(props){
+    const { type } = props;
+    const isSubredditPage = type === "subreddit";
     const subRedditName = 'webdev'
+
     return (
         <>  
-            {true && <Banner name={subRedditName}/>}
+            { isSubredditPage && <Banner name={subRedditName}/>}
             <main>       
                 <div className="feed">
                     <Posts  />
