@@ -1,8 +1,9 @@
 import { Post } from '../../components/Post'
 export function Posts (props){
     const post1 = {
+        postId: '1',
+        subreddit:'reactjs',
         votes: 2000,
-        subreddit:'r/javascript',
         title:'more frameworks required',
         introText:'The world cries out for more javascript frameworks during frameworks shortage.',
         author:'k.dodds',
@@ -11,9 +12,10 @@ export function Posts (props){
     };
 
     const post2 = {
-        votes: 3000,
-        subreddit:'r/javascript',
+        postId: '2',
+        subreddit:'javascript',
         title:'Is PHP better?',
+        votes: 3000,
         introText:'Should I learn PHP instead of Javascript?',
         author:'d.abramov',
         postedTime:'3 hours ago',
@@ -21,8 +23,9 @@ export function Posts (props){
     };
 
     const post3 = {
+        postId: '3',
+        subreddit:'webdev',
         votes: 3000,
-        subreddit:'r/javascript',
         title:'JQuery use finally peaked in 2021 ',
         introText:'JQuery decline has begun. We owe JQuery a huge debt',
         author:'m.appleton',
@@ -31,9 +34,16 @@ export function Posts (props){
     };
     
     const posts = [post1, post2, post3 ];
+    const { subreddit, postId } = props.params;
     return (
         <div className="posts">
-            {posts.map(post => <Post data={post} pageType={props.pageType}/>)}
+            {posts.filter(post =>{
+                if(postId){
+                    return (post.postId===postId && post.subreddit===subreddit); // if postId exists, then subreddit also exists and must also match. 
+                }else if(subreddit){
+                    return post.subreddit===subreddit;
+                }else{ return post }
+            }).map(post => <Post data={post} pageType={props.pageType}/>)}
         </div>
     );
 }

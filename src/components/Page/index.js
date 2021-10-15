@@ -12,7 +12,7 @@ export function Page(props){
             { isSubredditPage && <Banner name={subRedditName}/>}
             <main>       
                 <div className="feed">
-                    <Posts  pageType = { type }/>
+                    <Posts  pageType={type} params={props.params}/>
                 </div>
             </main>
             <aside>
