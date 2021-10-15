@@ -153,6 +153,9 @@ header {
   padding: 1rem 0rem;
 }
 
+header form {
+  display: flex;
+}
 .brand {
   display:flex;
   justify-content:flex-start;
@@ -174,6 +177,7 @@ header {
   max-width: 700px;
   align-self: center;
   background-color: #e6e6e6;
+  flex-grow:1;
 }
 
 @media screen and (min-width: 425px){
