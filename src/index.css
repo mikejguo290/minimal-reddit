@@ -172,6 +172,15 @@ header form {
   display:none;
   margin-left:0.5em;
 }
+
+.appNameLink {
+  text-decoration:none;
+  color:black;
+}
+
+.appNameLink p{
+  text-decoration:none;
+}
 /* search bar component styling */ 
 .searchBar {
   max-width: 700px;

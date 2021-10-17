@@ -1,4 +1,5 @@
 import redditImage from '../../images/reddit.jpeg' /* local imports */
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 export function Search (){
     const [ searchTerm, setSearchTerm ]=useState('');
@@ -19,10 +20,14 @@ export function Search (){
     return (
         <header>
             <div className="brand">
-            <figure className="logo">
-                <img src={redditImage} alt="reddit favicon"/>
-            </figure>
-            <p className="appName">RedditMinimal</p>
+            <Link to='/' className="appNameLink">
+                <figure className="logo">
+                    <img src={redditImage} alt="reddit favicon"/>
+                </figure>
+            </Link>
+            <Link to='/' className="appNameLink">
+                <p className="appName">RedditMinimal</p>
+            </Link>
             </div>
             <form onSubmit={handleSubmit}>
                 <input className="searchBar" placeholder='Search' value={searchTerm} onChange={handleChange} />

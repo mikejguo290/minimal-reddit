@@ -7,8 +7,8 @@ import { BrowserRouter as Router , Route, Switch } from 'react-router-dom';
 function App() {
   return (
     <>
-      <Search />
       <Router>
+        <Search />
         <Switch>
           <Route path="/r/:subreddit/comments/:postId">
             <PostDetailsPage />
