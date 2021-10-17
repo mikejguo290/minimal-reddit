@@ -1,9 +1,11 @@
 
 import { Comments } from '../../features/Comments';
+import { Link } from 'react-router-dom'
 export function Post(props){
     const {
-        votes,
+        permalink,
         subreddit,
+        votes,
         title,
         introText,
         author,
@@ -24,12 +26,16 @@ export function Post(props){
             </div>
             <div className="postContext">
                 <p>{subreddit}</p>
-                <h3>{title}</h3>
+                <Link to={permalink} className="postLink">
+                    <h3>{title}</h3>
+                </Link>
                 <p>{introText}</p>
                 <div className="postmetaData">
                     <p>By {author}</p>
                     <p>{postedTime}</p>
-                    <p>Comments</p>
+                    <Link to={permalink} className="postLink">
+                        <p>Comments</p>
+                    </Link>
                 </div>
                 {/* start of comments */}
                 { isPostDetailView && <Comments />}

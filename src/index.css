@@ -235,6 +235,12 @@ header form {
   padding:0.5em 0em 0.5em 1em;
   border-top: solid 1px gray;
 }
+
+.postLink {
+  text-decoration:none;
+  color:black;
+}
+
 /* comments styling */ 
 .comments {
   background-color: white;
