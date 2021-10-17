@@ -1,4 +1,5 @@
 import { Subreddit } from '../../components/Subreddit';
+import { NavLink } from 'react-router-dom';
 export function Subreddits(){
     const sub1 = {
         name:'javascript',
@@ -19,7 +20,15 @@ export function Subreddits(){
     return (
         <div className="subreddits">
             <h2>Subreddits</h2>
-            {subreddits.map(subreddit => <Subreddit data={subreddit} />)}
+            {
+                subreddits.map(subreddit => {
+                    return (
+                        <NavLink to={`/r/${subreddit.name}`} className="subredditNav" activeClassName="selectedSubreddit" > 
+                            <Subreddit data={subreddit} />
+                        </NavLink>
+                    )
+                })
+            }
         </div>       
     );
 }
