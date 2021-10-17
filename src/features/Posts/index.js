@@ -2,6 +2,7 @@ import { Post } from '../../components/Post'
 export function Posts (props){
     const post1 = {
         postId: '1',
+        permalink:'/r/reactjs/comments/1/',
         subreddit:'reactjs',
         votes: 2000,
         title:'more frameworks required',
@@ -13,6 +14,7 @@ export function Posts (props){
 
     const post2 = {
         postId: '2',
+        permalink:'/r/javascript/comments/2/',
         subreddit:'javascript',
         title:'Is PHP better?',
         votes: 3000,
@@ -24,6 +26,7 @@ export function Posts (props){
 
     const post3 = {
         postId: '3',
+        permalink:'/r/webdev/comments/3/',
         subreddit:'webdev',
         votes: 3000,
         title:'JQuery use finally peaked in 2021 ',
@@ -43,7 +46,7 @@ export function Posts (props){
                 }else if(subreddit){
                     return post.subreddit===subreddit;
                 }else{ return post } // all post gets returned at homepage. 
-            }).map(post => <Post data={post} pageType={props.pageType}/>)}
+            }).map(post => <Post key={postId} data={post} pageType={props.pageType}/>)}
         </div>
     );
 }
