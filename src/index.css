@@ -252,6 +252,17 @@ aside{
 .subreddits h2 {
   margin-bottom:0.5em;
 }
+
+.subredditNav {
+  color:black;
+  text-decoration:none;
+}
+
+.selectedSubreddit{
+  font-size:bold;
+  color:red;
+}
+
 /* subreddit */
 .subreddit {
   display:flex;
