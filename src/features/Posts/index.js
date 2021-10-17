@@ -38,11 +38,11 @@ export function Posts (props){
     return (
         <div className="posts">
             {posts.filter(post =>{
-                if(postId){
+                if(postId && subreddit){
                     return (post.postId===postId && post.subreddit===subreddit); // if postId exists, then subreddit also exists and must also match. 
                 }else if(subreddit){
                     return post.subreddit===subreddit;
-                }else{ return post }
+                }else{ return post } // all post gets returned at homepage. 
             }).map(post => <Post data={post} pageType={props.pageType}/>)}
         </div>
     );
