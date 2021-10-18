@@ -5,12 +5,12 @@ export function Post(props){
     const {
         permalink,
         subreddit,
+        subreddit_name_prefixed,
         votes,
         title,
         introText,
         author,
         postedTime,
-        comments,
     } = props.data;
 
     /* 
@@ -25,7 +25,9 @@ export function Post(props){
                 <p>{votes}</p>
             </div>
             <div className="postContext">
-                <p>{subreddit}</p>
+                <Link to={`/r/${subreddit}`} >
+                    <p className='postSubreddit'>{subreddit_name_prefixed}</p>
+                </Link>
                 <Link to={permalink} className="postLink">
                     <h3>{title}</h3>
                 </Link>

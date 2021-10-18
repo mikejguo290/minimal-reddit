@@ -208,6 +208,13 @@ header form {
 .posts {
   margin:0em 0.5em;
 }
+
+.postsList {
+  list-style:none;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  padding-inline-start: 0px;
+}
 /* post styling */
 .post {
   display:flex;
