@@ -1,3 +1,4 @@
+import React from 'react'
 import redditImage from '../../images/reddit.jpeg' /* local imports */
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
