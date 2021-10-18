@@ -265,6 +265,13 @@ aside{
   margin:1em 0.5em;
   box-shadow: 0 3px 10px 1px rgb(0 0 0 / 0.2);
 }
+
+.redditsList{
+  list-style:none;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  padding-inline-start: 0px;
+}
 /* subreddits */
 .subreddits {
   background-color:white;
