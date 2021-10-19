@@ -4,9 +4,9 @@ import { Posts } from '../../features/Posts';
 import { Banner } from '../Banner';
 
 export function Page(props){
-    const { type } = props;
+    const { type, params } = props;
     const isSubredditPage = type === "subreddit";
-    const subRedditName = 'webdev'
+    const subRedditName = params.subreddit;
 
     return (
         <>  
