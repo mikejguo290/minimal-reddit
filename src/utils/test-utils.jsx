@@ -1,12 +1,12 @@
 import React from 'react';
 import {render} from '@testing-library/react'
 import { BrowserRouter as Router } from 'react-router-dom';
-import {createMemoryHistory} from 'history';
+//import {createMemoryHistory} from 'history';
 
 const AllTheProviders = ({children})=>{
-    const history = createMemoryHistory();
+
     return (
-        <Router history={history}>
+        <Router>
             {children}
         </Router>
     )
