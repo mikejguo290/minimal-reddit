@@ -1,4 +1,5 @@
-import redditImage from '../../images/reddit.jpeg'
+import redditImage from '../../images/reddit.jpeg';
+import React from 'react';
 
 export function Subreddit(props){
     const { name } = props.data;

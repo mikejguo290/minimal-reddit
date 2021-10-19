@@ -1,3 +1,4 @@
+import React from 'react'
 export function Banner(props){
     return (
         <div className="banner" >

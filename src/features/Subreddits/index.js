@@ -1,3 +1,4 @@
+import React from 'react';
 import { Subreddit } from '../../components/Subreddit';
 import { NavLink } from 'react-router-dom';
 export function Subreddits(){

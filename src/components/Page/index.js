@@ -1,3 +1,4 @@
+import React from 'react';
 import { Subreddits } from '../../features/Subreddits';
 import { Posts } from '../../features/Posts';
 import { Banner } from '../Banner';

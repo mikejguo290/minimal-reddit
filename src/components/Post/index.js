@@ -1,6 +1,6 @@
-
+import React from 'react';
 import { Comments } from '../../features/Comments';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 export function Post(props){
     const {
         permalink,

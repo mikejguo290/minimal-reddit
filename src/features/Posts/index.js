@@ -1,3 +1,4 @@
+import React from 'react';
 import { Post } from '../../components/Post'
 export function Posts (props){
     const post1 = {
