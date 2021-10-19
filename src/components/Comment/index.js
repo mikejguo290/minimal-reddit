@@ -1,14 +1,15 @@
 import React from 'react';
 
-export function Comment(){
+export function Comment(props){
+    const {author, body, created_at} = props.data;
     return (
         <article className="comment">
             <div className="commentData">
-                <h4 className="commenter">Commenter</h4>
-                <p className="commentText">Anything goes here.</p>
+                <h4 className="commenter">{author}</h4>
+                <p className="commentText">{body}</p>
             </div>
             <div>
-                <p>time</p>
+                <p>{created_at}</p>
             </div>
         </article>
     )
