@@ -41,7 +41,7 @@ it('renders Subreddit page with the banner component',()=>{
   expect(h2Heading).toBeInTheDocument();
 });
 
-it('renders Post page without the banner component',()=>{
+it('renders PostDetailsPage without the banner component',()=>{
   // arrange
   render(<App />,
       {
@@ -53,4 +53,15 @@ it('renders Post page without the banner component',()=>{
   // expect 
   // there should be just two h2 headings, one is used in the aside subreddits. the other one is used in the banner.
   expect(h2Heading).not.toBeInTheDocument();
+});
+
+// will have to mock redux to supply this with the right set of data in Posts. 
+it('renders PostDetailsPage with just one Post',()=>{
+  const { container } =  render(
+      <App/>, 
+      {
+          route: '/r/webdev/comments/3'
+      });
+  // getting the number of elements with class 'post' by using the DOM node 
+  expect(container.getElementsByClassName('post').length).toBe(1);
 });
