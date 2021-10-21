@@ -16,6 +16,8 @@ jest.mock('react-router-dom',()=>({
 }));
 */
 
+// will have to mock redux to supply this with the right set of data in Posts. particularly the assertion about post by class per PostDetailsPage
+
 it('renders', ()=>{
     render(
         <Route path="/r/:subreddit/comments/:postId">
@@ -38,10 +40,10 @@ it('renders without the banner component',()=>{
             route: '/r/webdev/comments/3'
         });
     // act
-    const bannerH2Headings = screen.queryAllByRole('heading',{level:2});
+    const h2Heading = screen.queryByRole('heading',{level:2, name:/webdev/i});
     // expect 
     // there should be just two h2 headings, one is used in the aside subreddits. the other one is used in the banner.
-    expect(bannerH2Headings.length).toBe(1);
+    expect(h2Heading).not.toBeInTheDocument();
 });
 
 it('renders with just one Post',()=>{
