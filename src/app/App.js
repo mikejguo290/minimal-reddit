@@ -1,3 +1,4 @@
+import React from 'react';
 import { Search } from '../features/Search';
 import { Homepage } from '../pages/Homepage';
 import { SubredditPage } from '../pages/SubredditPage';
