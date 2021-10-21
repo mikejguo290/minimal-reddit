@@ -7,8 +7,7 @@ import { useEffect } from 'react'
 export function SubredditPage(){
     const pageType = "subreddit"
     const { subreddit } = useParams();
-    const params = {subreddit: subreddit, postId:null};
-
+    const params = {subreddit:subreddit, postId:null}
     useEffect(()=>{
         const fetchPosts = async()=>{
             const posts = await redditAPI.getPosts(subreddit);
@@ -18,6 +17,6 @@ export function SubredditPage(){
     },[subreddit]);
 
     return (
-        <Page type={pageType} params={params}/>
+        <Page type={pageType} params={params} />
     );
 }

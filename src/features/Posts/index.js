@@ -38,17 +38,10 @@ export function Posts (props){
     };
     
     const posts = [post1, post2, post3 ];
-    const { subreddit, postId } = props.params;
     return (
         <div className="posts">
             <ul className="postsList">
-            {posts.filter(post =>{
-                if(postId && subreddit){
-                    return (post.postId===postId && post.subreddit===subreddit); // if postId exists, then subreddit also exists and must also match. 
-                }else if(subreddit){
-                    return post.subreddit===subreddit;
-                }else{ return post } // all post gets returned at homepage. 
-            }).map(post => <li key={post.postId}><Post data={post} pageType={props.pageType}/></li>)}
+            {posts.map(post => <li key={post.postId}><Post data={post} pageType={props.pageType}/></li>)}
             </ul>
         </div>
     );
