@@ -12,8 +12,9 @@ const AllTheProviders = ({children})=>{
     )
 }
 
-const customRender = (ui, options) => {
-    return render(ui, {wrapper: AllTheProviders, ...options})
+const customRender = (ui, {route='/'}={}) => {
+    window.history.pushState({},'home page', route);
+    return render(ui, {wrapper: AllTheProviders})
 }
 
 
