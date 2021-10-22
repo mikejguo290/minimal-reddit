@@ -8,9 +8,9 @@ export function Post(props){
         subreddit_name_prefixed,
         votes,
         title,
-        introText,
+        selftext,
         author,
-        postedTime,
+        created_utc,
     } = props.data;
 
     /* 
@@ -31,10 +31,10 @@ export function Post(props){
                 <Link to={permalink} className="postLink">
                     <h3>{title}</h3>
                 </Link>
-                <p>{introText}</p>
+                { isPostDetailView && <p>{selftext}</p>}
                 <div className="postmetaData">
                     <p>By {author}</p>
-                    <p>{postedTime}</p>
+                    <p>{created_utc}</p>
                     <Link to={permalink} className="postLink">
                         <p>Comments</p>
                     </Link>
