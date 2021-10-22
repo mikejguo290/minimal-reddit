@@ -10,7 +10,7 @@ export function Posts (props){
     return (
         <div className="posts">
             <ul className="postsList">
-            {posts.map(post => <li key={post.postId}><Post data={post} pageType={props.pageType}/></li>)}
+            {posts.map(post => <li key={post.id}><Post data={post} pageType={props.pageType}/></li>)}
             </ul>
         </div>
     );
