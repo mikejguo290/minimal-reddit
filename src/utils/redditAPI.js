@@ -1,8 +1,28 @@
 
 const redditAPI = {
-    async getPostDetail(){
+    // children kind:t3 refers to a post.
+    // children kind:t1 refers to a comment
+    async getPostDetail({subreddit, id}){
         // gets the details of a single post, including its comments. 
+        const url =`https://www.reddit.com/r/${subreddit}/commnets/${id}.json`;
+        try{
+            const response = await fetch(url);
+            if(response.ok){
+                const jsonResponse = await response.json()
+                const [postsRes, repliesRes] = jsonResponse;
+                const posts = this.parsePosts(postsRes); // should return an array containing just one post.
+                return posts;
+            }else{
+                throw new Error('request has failed!');
+            }
+        }catch(e){
+            console.log(e);
+        }
     },
+    parseReplies(r){
+        const comments = r.data.children
+    },
+
     async getPosts(subreddit){
         //const subreddit = 'webdev'
         const listing="top"; //controversial, best, hot, new, random, rising, top
@@ -13,7 +33,7 @@ const redditAPI = {
             const response = await fetch(url);
             if(response.ok){
                 const jsonResponse = await response.json()
-                return this.parseResults(jsonResponse); 
+                return this.parsePosts(jsonResponse); 
             }else{
                 throw new Error('request has failed!');
             }
@@ -21,7 +41,7 @@ const redditAPI = {
             console.log(e);
         }
     },
-    parseResults(r){
+    parsePosts(r){
         const posts = r.data.children.map(post => {
             const { 
                 id,
