@@ -16,7 +16,7 @@ const options = {
         isLoading:false,
         hasError:false,
     }, 
-    reducers:()=>{},
+    reducers:{},
     extraReducers:{
         [fetchPostsBySubreddit.pending]:(state)=>{
             state.isLoading=true;
@@ -37,6 +37,7 @@ const options = {
 
 const postsSlice = createSlice(options);
 
-export default postsSlice.reducers();
+export const selectPosts = state => state.posts.posts;
+export default postsSlice.reducer;
 
 
