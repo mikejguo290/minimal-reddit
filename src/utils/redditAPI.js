@@ -56,7 +56,7 @@ const redditAPI = {
                 votes:score, 
                 permalink:permalink,
                 url:url,
-                postedTime:created_utc,
+                created_utc:created_utc,
                 media: media,
                 media_embed:media_embed,
                 media_only:media_only,
