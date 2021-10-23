@@ -19,7 +19,7 @@ export function Subreddits(){
         id:'4',
     }
     const sub5={
-        name:'Programminghumor',
+        name:'ProgrammerHumor',
         id:5,
     }
     const subreddits = [sub1, sub2, sub3, sub4, sub5];
