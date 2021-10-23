@@ -9,6 +9,16 @@ export const fetchPostsBySubreddit = createAsyncThunk(
     }
 );
 
+export const fetchPostsBySubredditAndPostId = createAsyncThunk(
+    'posts/fetchPostsBySubredditAndPostId',
+    async({subreddit, postId},thunkAPI)=>{
+        const data = await redditAPI.getPostDetail(subreddit, postId);
+        const posts = data.posts;
+        const comments = data.comments;
+        return posts;
+    }
+);
+
 const options = {
     name: 'posts',
     initialState: {
@@ -30,7 +40,20 @@ const options = {
             state.posts = action.payload;
             state.isLoading = false;
             state.hasError=false;
-        }
+        },
+        [fetchPostsBySubredditAndPostId.pending]:(state)=>{
+            state.isLoading=true;
+            state.hasError=false;
+        },
+        [fetchPostsBySubredditAndPostId.error]:(state)=>{
+            state.isLoading=false;
+            state.hasError=true;
+        },
+        [fetchPostsBySubredditAndPostId.fulfilled]:(state, action)=>{
+            state.posts = action.payload;
+            state.isLoading = false;
+            state.hasError=false;
+        },
     }
 
 }
@@ -38,6 +61,7 @@ const options = {
 const postsSlice = createSlice(options);
 
 export const selectPosts = state => state.posts.posts;
+export const selectIsLoadingStatus = state => state.posts.isLoading;
 export default postsSlice.reducer;
 
 
