@@ -1,5 +1,19 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import redditAPI from '../../utils/redditAPI';
+export const fetchPostsBySubreddits = createAsyncThunk(
+    'posts/fetchPostsBySubreddits',
+    async(subreddits)=>{
+        try{
+            const posts = await Promise.all(subreddits.map(subreddit => redditAPI.getPosts(subreddit))); // returns list of lists. 
+           
+            let mergedPosts=[]
+            posts.forEach(subredditPostsList => mergedPosts.push(...subredditPostsList)); // merge list so that posts from each subreddit alternates. 
+            return mergedPosts;
+        }catch(error){
+            console.log(error);
+        }
+    }
+);
 
 export const fetchPostsBySubreddit = createAsyncThunk(
     'posts/fetchPostsBySubreddit', 
@@ -28,6 +42,19 @@ const options = {
     }, 
     reducers:{},
     extraReducers:{
+        [fetchPostsBySubreddits.pending]:(state)=>{
+            state.isLoading=true;
+            state.hasError=false;
+        },
+        [fetchPostsBySubreddits.error]:(state)=>{
+            state.isLoading=false;
+            state.hasError=true;
+        },
+        [fetchPostsBySubreddits.fulfilled]:(state, action)=>{
+            state.posts = action.payload;
+            state.isLoading = false;
+            state.hasError=false;
+        },
         [fetchPostsBySubreddit.pending]:(state)=>{
             state.isLoading=true;
             state.hasError=false;

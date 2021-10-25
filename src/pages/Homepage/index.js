@@ -2,7 +2,7 @@ import React from 'react';
 import { Page } from '../../components/Page';
 import { useEffect } from 'react'
 import { useDispatch, useSelector  } from 'react-redux';
-import { fetchPostsBySubreddit , selectPosts } from '../../features/Posts/postsSlice';
+import { fetchPostsBySubreddits , selectPosts } from '../../features/Posts/postsSlice';
 
 export function Homepage(){
     const pageType = "home"
@@ -10,9 +10,9 @@ export function Homepage(){
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        dispatch(fetchPostsBySubreddit('webdev'));
+        dispatch(fetchPostsBySubreddits(['webdev', 'reactjs']));
     },[dispatch]);
-
+    
     const posts = useSelector(selectPosts);
 
     return (
