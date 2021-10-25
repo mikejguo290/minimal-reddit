@@ -2,66 +2,11 @@
 const redditAPI = {
     // children kind:t3 refers to a post.
     // children kind:t1 refers to a comment
-    async getPostDetail(subreddit, postId){
-        // gets the details of a single post, including its comments. 
-        const url =`https://www.reddit.com/r/${subreddit}/comments/${postId}.json`;
-        try{
-            const response = await fetch(url);
-            if(response.ok){
-                const jsonResponse = await response.json()
-                const [postsRes, repliesRes] = jsonResponse; // post detail json returns an array of data containing post detail first and replies second.
-                const posts = this.parsePosts(postsRes); // should return an array containing just one post.
-                const comments = this.parseComments(repliesRes);
-                return {posts: posts, comments: comments};
-            }else{
-                throw new Error('request has failed!');
-            }
-        }catch(e){
-            console.log(e);
-        }
-    },
-    parseComments(r){
-        const comments = r.data.children.map(comment => {
-            const {
-                subreddit_id,
-                subreddit,
-                subreddit_name_prefixed,
-                replies,
-                id,
-                author,
-                parent_id, // parent comment/post id
-                score,
-                author_fullname,
-                collapsed,
-                body,
-                body_html,
-                permalink,
-                created_utc,
-                link_id,
-                depth,
-            } = comment.data;
 
-            const data = {
-                subreddit_id,
-                subreddit,
-                subreddit_name_prefixed,
-                replies,
-                id,
-                author,
-                parent_id, // parent comment/post id
-                score,
-                author_fullname,
-                collapsed,
-                body,
-                body_html,
-                permalink,
-                created_utc,
-                link_id,
-                depth,
-            }
-            return data;
-        });
-        return comments;
+    async getAllPosts(subreddits){
+        //const posts = await Promise.all([Promise_1, Promise_2]); where Promise is this.getPosts();
+        const posts = await Promise.all(subreddits.map(subreddit => this.getPosts(subreddit)));
+        return posts;
     },
 
     async getPosts(subreddit){
@@ -128,7 +73,69 @@ const redditAPI = {
             return data;
         })
         return posts;
-    }
+    },
+
+    async getPostDetail(subreddit, postId){
+        // gets the details of a single post, including its comments. 
+        const url =`https://www.reddit.com/r/${subreddit}/comments/${postId}.json`;
+        try{
+            const response = await fetch(url);
+            if(response.ok){
+                const jsonResponse = await response.json()
+                const [postsRes, repliesRes] = jsonResponse; // post detail json returns an array of data containing post detail first and replies second.
+                const posts = this.parsePosts(postsRes); // should return an array containing just one post.
+                const comments = this.parseComments(repliesRes);
+                return {posts: posts, comments: comments};
+            }else{
+                throw new Error('request has failed!');
+            }
+        }catch(e){
+            console.log(e);
+        }
+    },
+    parseComments(r){
+        const comments = r.data.children.map(comment => {
+            const {
+                subreddit_id,
+                subreddit,
+                subreddit_name_prefixed,
+                replies,
+                id,
+                author,
+                parent_id, // parent comment/post id
+                score,
+                author_fullname,
+                collapsed,
+                body,
+                body_html,
+                permalink,
+                created_utc,
+                link_id,
+                depth,
+            } = comment.data;
+
+            const data = {
+                subreddit_id,
+                subreddit,
+                subreddit_name_prefixed,
+                replies,
+                id,
+                author,
+                parent_id, // parent comment/post id
+                score,
+                author_fullname,
+                collapsed,
+                body,
+                body_html,
+                permalink,
+                created_utc,
+                link_id,
+                depth,
+            }
+            return data;
+        });
+        return comments;
+    },
 }
 
 export default redditAPI; 

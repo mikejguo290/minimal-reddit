@@ -4,7 +4,6 @@ import { Post } from '../../components/Post'
 export function Posts (props){
     
     const { pageType, posts } = props;
-    console.log(posts);
     
     return (
         <div className="posts">
