@@ -1,24 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const sub1 = {
-    name:'javascript', /* subreddit display name */
-    id:'1',
+    name:'javascript', /* subreddit display_name */
+    display_name_prefixed: "r/javascript",
+    id:'t5_2qh30', /* match to subreddit name */
 }
 const sub2 = {
     name:'webdev',
-    id:'2', 
+    display_name_prefixed: "r/webdev",
+    id:'t5_2qs0q', 
 }
 const sub3 = {
     name:'reactjs',
-    id:'3', 
+    display_name_prefixed: "r/reactjs",
+    id:'t5_2zldd', 
 }
 const sub4={
     name:'learnprogramming',
-    id:'4',
+    display_name_prefixed: "r/learnprogramming",
+    id:'t5_2r7yd',
 }
 const sub5={
     name:'ProgrammerHumor',
-    id:5,
+    display_name_prefixed: "r/ProgrammerHumor",
+    id:'t5_2tex6',
 }
 const subreddits = [sub1, sub2, sub3, sub4, sub5];
 
