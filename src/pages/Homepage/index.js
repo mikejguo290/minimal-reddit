@@ -3,6 +3,7 @@ import { Page } from '../../components/Page';
 import { useEffect } from 'react'
 import { useDispatch, useSelector  } from 'react-redux';
 import { fetchPostsBySubreddits , selectPosts } from '../../features/Posts/postsSlice';
+import { selectSearch } from '../../features/Search/searchSlice';
 
 export function Homepage(){
     const pageType = "home"
@@ -14,9 +15,17 @@ export function Homepage(){
     },[dispatch]);
     
     const posts = useSelector(selectPosts);
+    const searchTerm = useSelector(selectSearch);
+    const filteredPosts = posts.filter(post => {
+        if(searchTerm){
+            return post.title.toLowerCase().includes(searchTerm.toLowerCase())
+        }else{
+            return post;
+        }
+    });
 
     return (
-        <Page type={pageType} params={params} posts={posts}/>
+        <Page type={pageType} params={params} posts={filteredPosts}/>
     );
 }
 
