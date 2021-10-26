@@ -1,7 +1,7 @@
 import React from 'react';
 
 export function Comment(props){
-    const {author, body, created_at} = props.data;
+    const {author, body, created_utc} = props.data;
     return (
         <article className="comment">
             <div className="commentData">
@@ -9,7 +9,7 @@ export function Comment(props){
                 <p className="commentText">{body}</p>
             </div>
             <div>
-                <p>{created_at}</p>
+                <p>{created_utc}</p>
             </div>
         </article>
     )
