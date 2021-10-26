@@ -234,6 +234,9 @@ header form {
 }
 .postContext {
   flex-grow: 1;
+  /* 2 rules to stop text items within overflowing */
+  min-width: 0;
+  overflow:hidden;
 }
 
 .postmetaData {
