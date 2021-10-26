@@ -18,18 +18,16 @@ export function PostDetailsPage(){
     // it should reduce unnecessary api calls. or at least the user shouldn't notice it because the Post details section shouldn't rerender. just the comments.
     // consider a createAsyncThunk for just getting the comments. rather than replacing all Posts in store. 
 
-    /*
-    useEffect(()=>{
-        if(filteredPost.length===0){ // *** how to deal with misspelt or none existent ids? 
-            dispatch(fetchPostsBySubredditAndPostId({subreddit:subreddit, postId:postId}));
-        }
-    },[dispatch,subreddit,postId, filteredPost])
-    */
-    
     /* test if i should make this call every time. instead of only when post data isn't available. */
+    console.log('rendering Post details page!')
+    console.log('filterd posts')
+    console.log(filteredPost)
+    console.log(subreddit);
+    console.log(postId);
+
     useEffect(()=>{
         dispatch(fetchPostsBySubredditAndPostId({subreddit:subreddit, postId:postId}));
-    },[dispatch,subreddit,postId])
+    },[dispatch, subreddit,postId]);
 
     return (
         <Page type={pageType} params={params} posts={filteredPost}/>

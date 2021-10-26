@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { addComments } from '../Comments/commentsSlice';
 import redditAPI from '../../utils/redditAPI';
 
 export const fetchPostsBySubreddits = createAsyncThunk(
@@ -30,6 +31,8 @@ export const fetchPostsBySubredditAndPostId = createAsyncThunk(
         const data = await redditAPI.getPostDetail(subreddit, postId);
         const posts = data.posts;
         const comments = data.comments;
+        const payload = {postId:postId, comments: comments,}
+        thunkAPI.dispatch(addComments(payload));
         return posts;
     }
 );
