@@ -3,6 +3,7 @@ import { Comments } from '../../features/Comments';
 import { Link } from 'react-router-dom';
 export function Post(props){
     const {
+        id,
         permalink,
         subreddit,
         subreddit_name_prefixed,
@@ -40,7 +41,7 @@ export function Post(props){
                     </Link>
                 </div>
                 {/* start of comments */}
-                { isPostDetailView && <Comments />}
+                { isPostDetailView && <Comments postId={id}/>}
                 {/* end of comments */}
             </div>
         </div>
