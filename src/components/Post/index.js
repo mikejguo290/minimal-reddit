@@ -36,7 +36,7 @@ export function Post(props){
                     <h3>{title}</h3>
                 </Link>
                 { isPostDetailView && selfTextHtmlExists && <div class="selftextHtml" dangerouslySetInnerHTML={createMarkup(selftext_html)} />}
-                <div className="postmetaData">
+                <div className="postMetaData">
                     <div>
                         <p>By {author}</p>
                         <ReactTimeAgo date={created_utc*1000} locale="en-GB" timeStyle="mini-minute-now"/>

@@ -238,11 +238,19 @@ header form {
   min-width: 0;
   overflow:hidden;
 }
+.postContext h3 {
+  padding: 1em 2em 0em 0em;
+}
 
-.postmetaData {
+.selftextHtml {
+  padding: 1em 2em 2em 0em;
+}
+
+.postMetaData {
   display:flex;
   justify-content:space-between;
-  padding:0.5em 0em 0.5em 1em;
+  padding:1em 0em;
+  margin-right:2em;
   border-top: solid 1px gray;
 }
 
