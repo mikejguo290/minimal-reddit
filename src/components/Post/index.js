@@ -1,6 +1,7 @@
 import React from 'react';
 import { Comments } from '../../features/Comments';
 import { Link } from 'react-router-dom';
+import { convertNumberToStringThousands, createMarkup } from '../../utils/helper'
 export function Post(props){
     const {
         id,
@@ -21,23 +22,10 @@ export function Post(props){
     */
     let isPostDetailView= props.pageType==="detail"; 
 
-     // helper function to unescape html strings with &lt; for tags.
-     function htmlDecode(input){
-        var doc = new DOMParser().parseFromString(input,'text/html');
-        return doc.documentElement.textContent;
-    }
-
-    // helper function to return object with __html property to set innerHTML in react. 
-    function createMarkup(){
-        return {
-            __html: htmlDecode(selftext_html),
-        }
-    } 
-
     return (
         <div className="post">
             <div className="postVotes">
-                <p>{votes}</p>
+                <p>{convertNumberToStringThousands(votes)}</p>
             </div>
             <div className="postContext">
                 <Link to={`/r/${subreddit}`} >
@@ -46,7 +34,7 @@ export function Post(props){
                 <Link to={permalink} className="postLink">
                     <h3>{title}</h3>
                 </Link>
-                { isPostDetailView && <div dangerouslySetInnerHTML={createMarkup()} />}
+                { isPostDetailView && <div dangerouslySetInnerHTML={createMarkup(selftext_html)} />}
                 <div className="postmetaData">
                     <p>By {author}</p>
                     <p>{created_utc}</p>
