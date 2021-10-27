@@ -10,6 +10,7 @@ export function Post(props){
         votes,
         title,
         selftext,
+        selftext_html,
         author,
         created_utc,
     } = props.data;
@@ -19,6 +20,19 @@ export function Post(props){
     to allow for viewing comments in homepage or subreddit, without clicking through to PostDetail page.
     */
     let isPostDetailView= props.pageType==="detail"; 
+
+     // helper function to unescape html strings with &lt; for tags.
+     function htmlDecode(input){
+        var doc = new DOMParser().parseFromString(input,'text/html');
+        return doc.documentElement.textContent;
+    }
+
+    // helper function to return object with __html property to set innerHTML in react. 
+    function createMarkup(){
+        return {
+            __html: htmlDecode(selftext_html),
+        }
+    } 
 
     return (
         <div className="post">
@@ -32,7 +46,7 @@ export function Post(props){
                 <Link to={permalink} className="postLink">
                     <h3>{title}</h3>
                 </Link>
-                { isPostDetailView && <p>{selftext}</p>}
+                { isPostDetailView && <div dangerouslySetInnerHTML={createMarkup()} />}
                 <div className="postmetaData">
                     <p>By {author}</p>
                     <p>{created_utc}</p>
