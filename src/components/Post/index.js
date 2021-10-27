@@ -1,7 +1,9 @@
 import React from 'react';
 import { Comments } from '../../features/Comments';
 import { Link } from 'react-router-dom';
-import { convertNumberToStringThousands, createMarkup } from '../../utils/helper'
+import { convertNumberToStringThousands, createMarkup } from '../../utils/helper';
+import ReactTimeAgo from 'react-time-ago';
+
 export function Post(props){
     const {
         id,
@@ -10,7 +12,6 @@ export function Post(props){
         subreddit_name_prefixed,
         votes,
         title,
-        selftext,
         selftext_html,
         author,
         created_utc,
@@ -20,8 +21,8 @@ export function Post(props){
     let page know if a request came in to view detailed Page view. this should be an attribute of a specific Post object.
     to allow for viewing comments in homepage or subreddit, without clicking through to PostDetail page.
     */
-    let isPostDetailView= props.pageType==="detail"; 
-
+    const isPostDetailView= props.pageType==="detail"; 
+    const selfTextHtmlExists = selftext_html !=null;
     return (
         <div className="post">
             <div className="postVotes">
@@ -34,10 +35,12 @@ export function Post(props){
                 <Link to={permalink} className="postLink">
                     <h3>{title}</h3>
                 </Link>
-                { isPostDetailView && <div dangerouslySetInnerHTML={createMarkup(selftext_html)} />}
+                { isPostDetailView && selfTextHtmlExists && <div dangerouslySetInnerHTML={createMarkup(selftext_html)} />}
                 <div className="postmetaData">
-                    <p>By {author}</p>
-                    <p>{created_utc}</p>
+                    <div>
+                        <p>By {author}</p>
+                        <ReactTimeAgo date={created_utc*1000} locale="en-GB" timeStyle="mini-minute-now"/>
+                    </div>
                     <Link to={permalink} className="postLink">
                         <p>Comments</p>
                     </Link>
