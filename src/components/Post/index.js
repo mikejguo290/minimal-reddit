@@ -35,7 +35,7 @@ export function Post(props){
                 <Link to={permalink} className="postLink">
                     <h3>{title}</h3>
                 </Link>
-                { isPostDetailView && selfTextHtmlExists && <div dangerouslySetInnerHTML={createMarkup(selftext_html)} />}
+                { isPostDetailView && selfTextHtmlExists && <div class="selftextHtml" dangerouslySetInnerHTML={createMarkup(selftext_html)} />}
                 <div className="postmetaData">
                     <div>
                         <p>By {author}</p>
