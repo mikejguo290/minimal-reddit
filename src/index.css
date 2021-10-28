@@ -237,20 +237,21 @@ header form {
   /* 2 rules to stop text items within overflowing */
   min-width: 0;
   overflow:hidden;
+  padding-right: 2em
 }
+
 .postContext h3 {
-  padding: 1em 2em 0em 0em;
+  margin:1em 0em;
 }
 
 .selftextHtml {
-  padding: 1em 2em 2em 0em;
+  margin:1em 0em 2em 0em;
 }
 
 .postMetaData {
   display:flex;
   justify-content:space-between;
   padding:1em 0em;
-  margin-right:2em;
   border-top: solid 1px gray;
 }
 
