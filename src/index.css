@@ -207,6 +207,7 @@ header form {
 /* posts styling */
 .posts {
   margin:0em 0.5em;
+  overflow-wrap:break-word;
 }
 
 .postsList {
@@ -267,6 +268,7 @@ header form {
 /* comments styling */ 
 .comments {
   background-color: white;
+  overflow-wrap:break-word;
 }
 
 .commentsList {
@@ -280,6 +282,7 @@ header form {
   padding:0.5em 1em 1em 1em;
   margin:1em 0em;
   background-color:#e6e6e6;
+  overflow:hidden;
 }
 
 .commentData {
