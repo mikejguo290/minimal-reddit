@@ -284,10 +284,14 @@ header form {
   background-color:#e6e6e6;
   overflow:hidden;
 }
+.comment p{
+  margin:0.5em 0em;
+}
 
 .commentData {
   display:flex;
   justify-content:space-between;
+  margin-bottom:0.75em;
 }
 /* subreddits Container*/  
 aside{
