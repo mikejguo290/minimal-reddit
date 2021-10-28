@@ -1,7 +1,7 @@
 import React from 'react';
 import { Comments } from '../../features/Comments';
 import { Link } from 'react-router-dom';
-import { convertNumberToStringThousands, createMarkup } from '../../utils/helper';
+import { convertNumberToStringThousands, createMarkup , checkUrlIsImage } from '../../utils/helper';
 import ReactTimeAgo from 'react-time-ago';
 
 export function Post(props){
@@ -15,6 +15,7 @@ export function Post(props){
         selftext_html,
         author,
         created_utc,
+        url,
     } = props.data;
 
     /* 
@@ -23,6 +24,7 @@ export function Post(props){
     */
     const isPostDetailView= props.pageType==="detail"; 
     const selfTextHtmlExists = selftext_html !=null;
+    const urlIsImage = checkUrlIsImage(url);
     return (
         <div className="post">
             <div className="postVotes">
@@ -36,11 +38,12 @@ export function Post(props){
                     <h3>{title}</h3>
                 </Link>
                 { isPostDetailView && selfTextHtmlExists && <div class="selftextHtml" dangerouslySetInnerHTML={createMarkup(selftext_html)} />}
+                { urlIsImage && <figure><img src={url} alt={`${subreddit_name_prefixed} - ${title}`} /></figure> }
                 <div className="postMetaData">
                     <div>
                         <p>By {author}</p>
-                        <ReactTimeAgo date={created_utc*1000} locale="en-GB" timeStyle="mini-minute-now"/>
                     </div>
+                    <ReactTimeAgo date={created_utc*1000} locale="en-GB" timeStyle="mini-minute-now"/>
                     <Link to={permalink} className="postLink">
                         <p>Comments</p>
                     </Link>
