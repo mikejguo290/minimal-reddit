@@ -1,7 +1,9 @@
 import React from 'react';
+import { convertNumberToStringThousands, createMarkup } from '../../utils/helper';
 
 export function Comment(props){
-    const {author, body, created_utc} = props.data;
+    const {author, body_html, created_utc} = props.data;
+    const bodyHtmlExists = body_html !=null;
     return (
         <article className="comment">
             <div className="commentData">
@@ -9,7 +11,7 @@ export function Comment(props){
                 <p>{created_utc}</p>
             </div>
             <div>
-                <p className="commentText">{body}</p>
+                { bodyHtmlExists && <div className="commentBodyHtml" dangerouslySetInnerHTML={createMarkup(body_html)} />}
             </div>
         </article>
     )
