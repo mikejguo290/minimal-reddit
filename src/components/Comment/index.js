@@ -6,10 +6,10 @@ export function Comment(props){
         <article className="comment">
             <div className="commentData">
                 <h4 className="commenter">{author}</h4>
-                <p className="commentText">{body}</p>
+                <p>{created_utc}</p>
             </div>
             <div>
-                <p>{created_utc}</p>
+                <p className="commentText">{body}</p>
             </div>
         </article>
     )

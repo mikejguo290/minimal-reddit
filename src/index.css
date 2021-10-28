@@ -277,11 +277,14 @@ header form {
 }
 /* comment styling */ 
 .comment {
-  display:flex;
-  justify-content:space-between;
   padding:0.5em 1em 1em 1em;
   margin:1em 0em;
   background-color:#e6e6e6;
+}
+
+.commentData {
+  display:flex;
+  justify-content:space-between;
 }
 /* subreddits Container*/  
 aside{
