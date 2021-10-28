@@ -79,7 +79,14 @@ const redditAPI = {
         // gets the details of a single post, including its comments. 
         const url =`https://www.reddit.com/r/${subreddit}/comments/${postId}.json`;
         try{
-            const response = await fetch(url);
+            const options = {
+                method:'GET',
+                headers: {
+                    'Accept':'application/json'
+                }
+            }
+
+            const response = await fetch(url,options);
             if(response.ok){
                 const jsonResponse = await response.json()
                 const [postsRes, repliesRes] = jsonResponse; // post detail json returns an array of data containing post detail first and replies second.
