@@ -1,5 +1,6 @@
 import React from 'react';
-import { convertNumberToStringThousands, createMarkup } from '../../utils/helper';
+import { createMarkup } from '../../utils/helper';
+import ReactTimeAgo from 'react-time-ago';
 
 export function Comment(props){
     const {author, body_html, created_utc} = props.data;
@@ -8,7 +9,7 @@ export function Comment(props){
         <article className="comment">
             <div className="commentData">
                 <h4 className="commenter">{author}</h4>
-                <p>{created_utc}</p>
+                <ReactTimeAgo date={created_utc*1000} locale="en-GB" timeStyle="mini-minute-now"/>
             </div>
             <div>
                 { bodyHtmlExists && <div className="commentBodyHtml" dangerouslySetInnerHTML={createMarkup(body_html)} />}
