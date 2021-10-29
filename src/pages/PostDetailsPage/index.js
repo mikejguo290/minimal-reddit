@@ -2,6 +2,7 @@ import React from 'react';
 import { Page } from '../../components/Page';
 import { useParams } from 'react-router-dom';
 import { fetchPostsBySubredditAndPostId, selectPosts } from '../../features/Posts/postsSlice';
+import { fetchComments } from '../../features/Comments/commentsSlice';
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -29,6 +30,10 @@ export function PostDetailsPage(){
         dispatch(fetchPostsBySubredditAndPostId({subreddit:subreddit, postId:postId}));
     },[dispatch, subreddit,postId]);
 
+    useEffect(()=>{
+        dispatch(fetchComments({subreddit:subreddit, postId:postId}));
+    },[dispatch, subreddit,postId]);
+    
     return (
         <Page type={pageType} params={params} posts={filteredPost}/>
     );
