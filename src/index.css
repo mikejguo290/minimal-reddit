@@ -244,6 +244,14 @@ header form {
 .postContext h3 {
   margin:1em 0em;
 }
+.postContext figure {
+  margin: 1em 0em 2em 0em;
+}
+
+.postContext img {
+  width: 100%;
+  height: auto;
+}
 
 .selftextHtml {
   margin:1em 0em 2em 0em;
