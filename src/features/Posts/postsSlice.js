@@ -17,15 +17,14 @@ export const fetchPostsBySubreddits = createAsyncThunk(
         }
     }
 );
-
+// returns post details from call to reddit json api for each individual post. 
+// i.e. when navigating to /r/subreddit_x/comments/postId/
+// can also return comments but separated that into a C.A.T for comments
 export const fetchPostsBySubredditAndPostId = createAsyncThunk(
     'posts/fetchPostsBySubredditAndPostId',
     async({subreddit, postId},thunkAPI)=>{
         const data = await redditAPI.getPostDetail(subreddit, postId);
         const posts = data.posts;
-        const comments = data.comments;
-        const payload = {postId:postId, comments: comments,}
-        thunkAPI.dispatch(addComments(payload));
         return posts;
     }
 );
