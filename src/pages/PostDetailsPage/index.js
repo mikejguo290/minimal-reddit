@@ -13,27 +13,20 @@ export function PostDetailsPage(){
     const dispatch = useDispatch();
     const posts = useSelector(selectPosts); // once posts is updated, this page would rerender and pass filteredPost as props to page. 
     const filteredPost = posts.filter(post => post.id === postId); 
-    // if the post isn't in list of posts. make an api call. else, pass on filtered post as props down to be rendered by Posts component. 
-    // this means the app renders posts in subreddits very quickly for the PostDetailsPage, going back should be fast too. 
-    // and can also deal with users who try the url route. saved pages. similarity to reddit urls etc.
-    // it should reduce unnecessary api calls. or at least the user shouldn't notice it because the Post details section shouldn't rerender. just the comments.
-    // consider a createAsyncThunk for just getting the comments. rather than replacing all Posts in store. 
-
-    /* test if i should make this call every time. instead of only when post data isn't available. */
-    console.log('rendering Post details page!')
-    console.log('filterd posts')
-    console.log(filteredPost)
-    console.log(subreddit);
-    console.log(postId);
 
     useEffect(()=>{
-        dispatch(fetchPostsBySubredditAndPostId({subreddit:subreddit, postId:postId}));
-    },[dispatch, subreddit,postId]);
+        // if the post isn't in list of posts. make an api call. else, pass on filtered post as props down to be rendered by Posts component. 
+        // this means the app renders posts in subreddits quickly for the PostDetailsPage, going back to subreddits page. 
+        // and can also deal with users who try the url route. saved pages. similarity to reddit urls etc. 
+        if(filteredPost.length===0){
+            dispatch(fetchPostsBySubredditAndPostId({subreddit:subreddit, postId:postId}));
+        }
+    },[dispatch, subreddit, postId, filteredPost.length]);
 
     useEffect(()=>{
         dispatch(fetchComments({subreddit:subreddit, postId:postId}));
     },[dispatch, subreddit,postId]);
-    
+
     return (
         <Page type={pageType} params={params} posts={filteredPost}/>
     );

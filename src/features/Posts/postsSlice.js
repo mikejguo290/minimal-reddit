@@ -60,7 +60,12 @@ const options = {
             state.hasError=true;
         },
         [fetchPostsBySubredditAndPostId.fulfilled]:(state, action)=>{
-            state.posts = action.payload;
+            // if no post id can match the payload.id, only then, add the post in action.payload to state.posts
+            // doesn't quite work at the moment as the only way to navigate to new post is via reloading url which wipes the store of previously saved posts!
+            // to navigate fast between (just) individual subreddit and the new post, would need a way of accessing the url without reloading. 
+            if (!state.posts.find(post => post.id === action.payload.id)){
+                state.posts.push(...action.payload);
+            }
             state.isLoading = false;
             state.hasError=false;
         },
