@@ -292,8 +292,12 @@ header form {
   background-color:#e6e6e6;
   overflow:hidden;
 }
-.comment p{
+.comment p {
   margin:0.5em 0em;
+}
+
+.comment li {
+  margin:0.3em 0em;
 }
 
 .commentData {
