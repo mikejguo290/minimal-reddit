@@ -15,17 +15,15 @@ const redditAPI = {
         const limit = 10; 
         const timeframe = 'month'; //hour, day, week, month, year, all
         const url =`https://www.reddit.com/r/${subreddit}/${listing}.json?limit=${limit}&t=${timeframe}`
-        try{
-            const response = await fetch(url);
-            if(response.ok){
-                const jsonResponse = await response.json()
-                return this.parsePosts(jsonResponse); 
-            }else{
-                throw new Error('request has failed!');
-            }
-        }catch(e){
-            console.log(e);
+        
+        const response = await fetch(url);
+        if(response.ok){
+            const jsonResponse = await response.json()
+            return this.parsePosts(jsonResponse); 
+        }else{
+            throw new Error('request has failed!');
         }
+        
     },
     parsePosts(r){
         const posts = r.data.children.map(post => {
@@ -78,26 +76,23 @@ const redditAPI = {
     async getPostDetail(subreddit, postId){
         // gets the details of a single post, including its comments. 
         const url =`https://www.reddit.com/r/${subreddit}/comments/${postId}.json`;
-        try{
-            const options = {
-                method:'GET',
-                headers: {
-                    'Accept':'application/json'
-                }
+       
+        const options = {
+            method:'GET',
+            headers: {
+                'Accept':'application/json'
             }
+        }
 
-            const response = await fetch(url,options);
-            if(response.ok){
-                const jsonResponse = await response.json()
-                const [postsRes, repliesRes] = jsonResponse; // post detail json returns an array of data containing post detail first and replies second.
-                const posts = this.parsePosts(postsRes); // should return an array containing just one post.
-                const comments = this.parseComments(repliesRes);
-                return {posts: posts, comments: comments};
-            }else{
-                throw new Error('request has failed!');
-            }
-        }catch(e){
-            console.log(e);
+        const response = await fetch(url,options);
+        if(response.ok){
+            const jsonResponse = await response.json()
+            const [postsRes, repliesRes] = jsonResponse; // post detail json returns an array of data containing post detail first and replies second.
+            const posts = this.parsePosts(postsRes); // should return an array containing just one post.
+            const comments = this.parseComments(repliesRes);
+            return {posts: posts, comments: comments};
+        }else{
+            throw new Error('request has failed!');
         }
     },
     parseComments(r){
