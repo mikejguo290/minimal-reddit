@@ -3,7 +3,7 @@ import { Page } from '../../components/Page';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react'
 import { selectSearch } from '../../features/Search/searchSlice';
-import { fetchPostsBySubreddit , selectPosts } from '../../features/Posts/postsSlice';
+import { fetchPostsBySubreddits , selectPosts } from '../../features/Posts/postsSlice';
 import { useDispatch , useSelector  } from 'react-redux'
 
 export function SubredditPage(){
@@ -29,7 +29,7 @@ export function SubredditPage(){
         if(filteredPosts.length<=1){
             // if subreddit posts less than or equal to 1, call api to get reddits. this is vulnerable to misspellings causing endless api calls.
             // or if subreddit has no posts or just one post. 
-            dispatch(fetchPostsBySubreddit(subreddit));
+            dispatch(fetchPostsBySubreddits([subreddit]));
         }
     },[subreddit,filteredPosts, dispatch]);
 
