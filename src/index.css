@@ -310,6 +310,10 @@ header form {
   margin:0.3em 0em;
 }
 
+.commentKarma {
+  color:rgb(83, 83, 83);
+}
+
 .commentData {
   display:flex;
   justify-content:space-between;
