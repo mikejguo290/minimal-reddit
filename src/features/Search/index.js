@@ -10,14 +10,20 @@ export function Search (){
     const dispatch = useDispatch();
     const searchTerm = useSelector(selectSearch);
 
-    const handleChange = (event) =>{
+    const handleChange = (event) => {
         const userInput = event.target.value;
         dispatch(setSearchTerm(userInput));
     }
 
+    const handleSubmit = (event) => {
+        // ***** form submission is disabled! *****
+        event.preventDefault();
+    }
+
     /* 
 
-    // extra feature. implement submit searchTerm to filter and display something else. 
+    // extra feature. implement submit searchTerm to filter and display list of results
+    // rendered in a dedicated search results page. 
     // in reddit app. typing search brings up list of matching subreddits
     // submitting search result tells reddit app to search for posts. communities, subreddits etc. 
     const handleSubmit = (event) =>{
@@ -42,7 +48,7 @@ export function Search (){
                 <p className="appName">RedditMinimal</p>
             </Link>
             </div>
-            <form >
+            <form onSubmit={handleSubmit} >
                 <input className="searchBar" placeholder='Search' value={searchTerm} onChange={handleChange} />
             </form>
         </header>
