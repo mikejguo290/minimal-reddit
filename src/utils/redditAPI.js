@@ -96,7 +96,11 @@ const redditAPI = {
         }
     },
     parseComments(r){
-        const comments = r.data.children.map(comment => {
+        // filter for comment by stipulating data.children[child].kind==="t1"
+        // kind==="more" data.children with list of comment ids
+        // each comment can be accessed with the attribute 
+        // permalink: "/r/learnprogramming/comments/qgx47b/my_teenager_is_learning_python_and_a_few_other/commentId/" where hi99v3j
+        const comments = r.data.children.filter(child => child.kind==="t1").map(comment => {
             const {
                 subreddit_id,
                 subreddit,
