@@ -16,6 +16,7 @@ export function Post(props){
         author,
         created_utc,
         url,
+        num_comments,
     } = props.data;
 
     /* 
@@ -50,7 +51,12 @@ export function Post(props){
                     </div>
                     <ReactTimeAgo date={created_utc*1000} locale="en-GB" timeStyle="mini-minute-now"/>
                     <Link to={permalink} className="postLink">
-                        <p>Comments</p>
+                        <div className="commentNumberContainer">
+                            <p>{num_comments}</p>
+                            <span className="material-icons-outlined">
+                                comment
+                            </span>
+                        </div>
                     </Link>
                 </div>
                 {/* start of comments */}

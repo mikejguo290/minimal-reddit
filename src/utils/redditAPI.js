@@ -43,6 +43,7 @@ const redditAPI = {
                 media,
                 media_embed,
                 media_only,
+                num_comments,
                 isVideo,
                 thumbnail,
                 edited,
@@ -67,6 +68,7 @@ const redditAPI = {
                 isVideo:isVideo,
                 thumbnail:thumbnail,
                 edited:edited,
+                num_comments:num_comments,
             }
             return data;
         })
