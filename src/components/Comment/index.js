@@ -13,7 +13,7 @@ export function Comment(props){
             </div>
             <div>
                 { bodyHtmlExists && <div className="commentBodyHtml" dangerouslySetInnerHTML={createMarkup(body_html)} />}
-                <p class="commentKarma">{ `${score} Karma` }</p>
+                <p className="commentKarma">{ `${score} Karma` }</p>
             </div>
         </article>
     )
