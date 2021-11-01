@@ -241,11 +241,15 @@ header form {
   padding-right: 2em
 }
 
-.postContext h3 {
+.postContent {
+  padding-bottom:1em;
+}
+.postContent h3 {
   margin:1em 0em;
 }
+
 .postContext figure {
-  margin: 1em 0em 2em 0em;
+  margin: 1em 0em 1em 0em; 
 }
 
 .postContext img {
@@ -253,9 +257,15 @@ header form {
   height: auto;
 }
 
-.selftextHtml {
-  margin:1em 0em 2em 0em;
+.postedResource {
+  display: inline-block;
+  margin:1em 0em;
 }
+
+.selftextHtml {
+  margin:1em 0em 1em 0em;
+}
+
 
 .selftextHtml p{
   margin:1em 0em;
