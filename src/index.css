@@ -283,6 +283,14 @@ header form {
   color:black;
 }
 
+.commentNumberContainer{
+  display:flex;
+}
+
+.commentNumberContainer p{
+  margin:0em 0.5em;
+}
+
 /* comments styling */ 
 .comments {
   background-color: white;
