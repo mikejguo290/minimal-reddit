@@ -29,3 +29,8 @@ export function checkUrlIsImage(url){
     // checks url's file extension and returns true if extension matches list of image file extensions.
     return url.match(/\.(jpeg|jpg|png|gif|tiff|psd|pdf|eps|ai|indd|raw)$/)!=null;
 }
+
+export function checkUrlContainsPostId(url, postId){
+    // checks url for inclusion of postId, if so Link is not worth rendering!
+    return url.includes(postId);
+}

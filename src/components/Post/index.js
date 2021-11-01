@@ -1,7 +1,7 @@
 import React from 'react';
 import { Comments } from '../../features/Comments';
 import { Link } from 'react-router-dom';
-import { convertNumberToStringThousands, createMarkup , checkUrlIsImage } from '../../utils/helper';
+import { convertNumberToStringThousands, createMarkup , checkUrlIsImage, checkUrlContainsPostId } from '../../utils/helper';
 import ReactTimeAgo from 'react-time-ago';
 
 export function Post(props){
@@ -25,20 +25,25 @@ export function Post(props){
     const isPostDetailView= props.pageType==="detail"; 
     const selfTextHtmlExists = selftext_html !=null;
     const urlIsImage = checkUrlIsImage(url);
+    const urlContainsPostId = checkUrlContainsPostId(url, id);
     return (
         <div className="post">
             <div className="postVotes">
                 <p>{convertNumberToStringThousands(votes)}</p>
             </div>
             <div className="postContext">
-                <Link to={`/r/${subreddit}`} >
-                    <p className='postSubreddit'>{subreddit_name_prefixed}</p>
-                </Link>
-                <Link to={permalink} className="postLink">
-                    <h3>{title}</h3>
-                </Link>
-                { isPostDetailView && selfTextHtmlExists && <div class="selftextHtml" dangerouslySetInnerHTML={createMarkup(selftext_html)} />}
-                { urlIsImage && <figure><img src={url} alt={`${subreddit_name_prefixed} - ${title}`} /></figure> }
+                <div className="postContent">
+                    <Link to={`/r/${subreddit}`} >
+                        <p className='postSubreddit'>{subreddit_name_prefixed}</p>
+                    </Link>
+                    <Link to={permalink} className="postLink">
+                        <h3>{title}</h3>
+                    </Link>
+                    { isPostDetailView && selfTextHtmlExists && <div class="selftextHtml" dangerouslySetInnerHTML={createMarkup(selftext_html)} />}
+                    { urlIsImage && <figure><img src={url} alt={`${subreddit_name_prefixed} - ${title}`} /></figure> }
+                    { /* render link only if it's not image or postId isn't in the link (which is just a duplicate of page url) */ }
+                    { !urlIsImage && isPostDetailView && !urlContainsPostId && <a className="postedResource" href={url}>{url}</a> }
+                </div>
                 <div className="postMetaData">
                     <div>
                         <p>By {author}</p>
