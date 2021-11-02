@@ -14,7 +14,6 @@ export function SubredditPage(){
     const posts = useSelector(selectPosts); // once posts is updated, this page would rerender and pass filteredPost as props to page. 
     const searchTerm = useSelector(selectSearch);
     let filteredPosts = posts.filter(post => post.subreddit === subreddit); 
-    const postIds = filteredPosts.map(post => post.id);
 
     filteredPosts = filteredPosts.filter(post => {
         if(searchTerm){
@@ -23,6 +22,8 @@ export function SubredditPage(){
             return post;
         }
     });
+    
+    const postIds = filteredPosts.map(post => post.id);
 
     const dispatch = useDispatch();
     
@@ -35,6 +36,6 @@ export function SubredditPage(){
     },[subreddit,filteredPosts, dispatch]);
 
     return (
-        <Page type={pageType} params={params} posts={filteredPosts} postIds={postIds} />
+        <Page type={pageType} params={params} postIds={postIds} />
     );
 }

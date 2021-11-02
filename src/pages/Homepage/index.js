@@ -32,7 +32,7 @@ export function Homepage(){
     const postIds = filteredPosts.map(post => post.id);
 
     return (
-        <Page type={pageType} params={params} posts={filteredPosts} postIds={postIds} />
+        <Page type={pageType} params={params} postIds={postIds} />
     );
 }
 
