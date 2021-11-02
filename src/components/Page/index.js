@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { selectIsLoadingStatus } from '../../features/Posts/postsSlice';
 
 export function Page(props){
-    const { type, params, posts } = props;
+    const { type, params, posts, postIds } = props;
     const isSubredditPage = type === "subreddit";
     const subRedditName = params.subreddit;
     const isLoading = useSelector(selectIsLoadingStatus);
@@ -15,7 +15,7 @@ export function Page(props){
             { isSubredditPage && <Banner name={subRedditName}/>}
             <main>       
                 <div className="feed">
-                    <Posts  pageType={type} posts={posts} />
+                    <Posts  pageType={type} posts={posts} postIds={postIds} />
                 </div>
             </main>
             <aside>

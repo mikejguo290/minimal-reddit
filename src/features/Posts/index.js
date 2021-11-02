@@ -6,7 +6,7 @@ import { selectSearch, clearSearchTerm } from '../Search/searchSlice';
 
 export function Posts (props){
     
-    const { pageType, posts } = props;
+    const { pageType, posts, postIds } = props;
     const filteredPostsIsEmpty = posts.length===0;
 
     const dispatch = useDispatch();

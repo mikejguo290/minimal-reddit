@@ -12,7 +12,8 @@ export function PostDetailsPage(){
     const params = {subreddit:subreddit, postId:postId};
     const dispatch = useDispatch();
     const posts = useSelector(selectPosts); // once posts is updated, this page would rerender and pass filteredPost as props to page. 
-    const filteredPost = posts.filter(post => post.id === postId); 
+    const filteredPost = posts.filter(post => post.id === postId);
+    const postIds = filteredPost.map(post => post.id);
     const error = useSelector(selectHasErrorStatus); // error is either false or an obj { name, message, stack }
     const errorMessage = error? error.message : ''; 
 
@@ -32,6 +33,6 @@ export function PostDetailsPage(){
     },[dispatch, subreddit,postId]);
 
     return (
-        <Page type={pageType} params={params} posts={filteredPost}/>
+        <Page type={pageType} params={params} posts={filteredPost} postIds={postIds} />
     );
 }
