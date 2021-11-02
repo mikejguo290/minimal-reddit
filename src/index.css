@@ -189,6 +189,19 @@ header form {
   flex-grow:1;
 }
 
+.emptySearchResult {
+  text-align:center;
+  margin: 2em 1em;
+}
+
+.emptySearchResult .resetSearch {
+  margin: 1em;
+  padding: 0.5em;
+  color:ghostwhite;
+  font-weight:bold;
+  background-color:#FF5700;
+}
+
 @media screen and (min-width: 425px){
   .appName {
     display:block;
