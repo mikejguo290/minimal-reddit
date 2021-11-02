@@ -393,3 +393,10 @@ aside{
 .subreddit h3{
   margin-left:0.5em;
 }
+
+/* error */
+.errorMessage {
+  text-align:center;
+  font-weight:bold;
+  margin: 2em 1em;
+}
