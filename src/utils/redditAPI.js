@@ -3,12 +3,6 @@ const redditAPI = {
     // children kind:t3 refers to a post.
     // children kind:t1 refers to a comment
 
-    async getAllPosts(subreddits){
-        //const posts = await Promise.all([Promise_1, Promise_2]); where Promise is this.getPosts();
-        const posts = await Promise.all(subreddits.map(subreddit => this.getPosts(subreddit)));
-        return posts;
-    },
-
     async getPosts(subreddit){
         //const subreddit = 'webdev'
         const listing="top"; //controversial, best, hot, new, random, rising, top
