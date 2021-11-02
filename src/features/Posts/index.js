@@ -3,10 +3,15 @@ import { Post } from '../../components/Post';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { selectSearch, clearSearchTerm } from '../Search/searchSlice';
+import { selectPosts } from './postsSlice';
 
 export function Posts (props){
     
-    const { pageType, posts, postIds } = props;
+    const { pageType, postIds } = props;
+    const allPosts = useSelector(selectPosts);
+    // filter posts by the criteria that postIds array includes post.id
+    const posts = allPosts.filter(post => postIds.includes(post.id));
+
     const filteredPostsIsEmpty = posts.length===0;
 
     const dispatch = useDispatch();
