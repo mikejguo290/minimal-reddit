@@ -11,6 +11,9 @@ const options = {
     reducers: {
         setSearchTerm:(state, action) =>{
             state.value = action.payload;
+        },
+        clearSearchTerm:(state) => {
+            state.value='';
         }
     },
 }
@@ -18,5 +21,5 @@ const options = {
 const searchSlice = createSlice(options);
 
 export const selectSearch = state => state.search.value;
-export const { setSearchTerm } = searchSlice.actions;
+export const { setSearchTerm, clearSearchTerm } = searchSlice.actions;
 export default searchSlice.reducer;
