@@ -235,7 +235,6 @@ header form {
   padding:0.5em;
   margin: 1em 0em;
   background-color:white;
-  box-shadow: 0px 2px 5px 5px #e6e6e6;
   box-shadow: 0 3px 10px 1px rgb(0 0 0 / 0.2);
 }
 
@@ -246,6 +245,7 @@ header form {
   align-items: flex-start;
   padding-top:0.5em;
 }
+
 .postContext {
   flex-grow: 1;
   /* 2 rules to stop text items within overflowing */
@@ -257,6 +257,7 @@ header form {
 .postContent {
   padding-bottom:1em;
 }
+
 .postContent h3 {
   margin:1em 0em;
 }
@@ -320,9 +321,15 @@ header form {
 .comment {
   padding:0.5em 1em 1em 1em;
   margin:1em 0em;
-  background-color:#e6e6e6;
+  background-color: #e6e6e6; /* alternative colors from dark to light #e6e6e6 #efefef #f1f1f1 #f3f3f3 */ 
   overflow:hidden;
+  transition:0.3s;
 }
+
+.comment:hover {
+  box-shadow: 0 3px 10px 1px rgb(0 0 0 / 0.4);
+}
+
 .comment p {
   margin:0.5em 0em;
 }
@@ -378,9 +385,11 @@ aside{
   padding:0.5em;
   align-items:center;
 }
+
 .subreddit figure {
   width:30px;
 }
+
 .subreddit h3{
   margin-left:0.5em;
 }
