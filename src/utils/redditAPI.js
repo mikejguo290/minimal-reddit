@@ -15,7 +15,7 @@ const redditAPI = {
             const jsonResponse = await response.json()
             return this.parsePosts(jsonResponse); 
         }else{
-            throw new Error('request has failed!');
+            throw new Error('Cannot fetch data from specified resource.');
         }
         
     },
@@ -88,7 +88,7 @@ const redditAPI = {
             const comments = this.parseComments(repliesRes);
             return {posts: posts, comments: comments};
         }else{
-            throw new Error('request has failed!');
+            throw new Error('cannot fetch data from specified resource.');
         }
     },
     parseComments(r){
