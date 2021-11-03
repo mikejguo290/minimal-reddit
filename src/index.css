@@ -113,35 +113,13 @@ html {
   grid-template-columns:1fr;
 }
 
-@media screen and (min-width: 320px){
-  html {font-size:calc(12px + 4*((100vw - 320px)/(768 - 320)))}
-}
-@media screen and (min-width: 768px){
-  html {font-size:16px;}
-  
-  #root {
-    grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows:4rem auto 1fr; /* header, banner, main+aside */
-  }
-
-  header {
-    grid-column: 1/4;
-    grid-row: 1/2;
-  }
-
-  .banner {
-    grid-column:1/4;
-    grid-row: 2/3;
-  }
-
-  main {
-    grid-column:1/3
-    /* no need for grid-row here both main and aside are in third row*/
-  }
-  /* don't have to define grid-column for the other grid item - aside  */
-  aside {
-    align-self:start;
-  }
+header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color:white;
+  /* box shadow offset x, offset y, blur, spread, colour*/
+  box-shadow: 0 3px 10px 1px rgb(0 0 0 / 0.2);
+  padding: 1rem 0rem;
 }
 
 header {
@@ -202,11 +180,6 @@ header form {
   background-color:#FF5700;
 }
 
-@media screen and (min-width: 425px){
-  .appName {
-    display:block;
-  }
-}
 /* .banner */
 .banner {
   background-color:gainsboro;
@@ -400,4 +373,73 @@ aside{
   text-align:center;
   font-weight:bold;
   margin: 2em 1em;
+}
+
+
+@media screen and (min-width: 320px){
+  html {font-size:calc(12px + 4*((100vw - 320px)/(768 - 320)))}
+}
+/* search bar component styling */ 
+@media screen and (min-width: 425px){
+  .appName {
+    display:block;
+  }
+}
+
+@media screen and (min-width: 768px){
+  html {font-size:16px;}
+  
+  #root {
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows:4rem auto 1fr; /* header, banner, main+aside */
+  }
+
+  header {
+    grid-column: 1/4;
+    grid-row: 1/2;
+  }
+
+  .banner {
+    grid-column:1/4;
+    grid-row: 2/3;
+  }
+
+  main {
+    grid-column:1/3
+    /* no need for grid-row here both main and aside are in third row*/
+  }
+  /* don't have to define grid-column for the other grid item - aside  */
+  aside {
+    align-self:start;
+  }
+}
+
+@media screen and (min-width: 1025px){
+  #root {
+    grid-template-columns: 1fr 249px 498px 277px 1fr; /* adding two equally sized columns for whitespace. */
+    grid-template-rows:4rem auto 1fr; /* header, banner, main+aside */
+  }
+
+  header {
+    grid-column: 1/6;
+    grid-row: 1/2;
+    grid-template-columns: 1fr 341px 341px 341px 1fr  /* adding two equally sized columns for whitespace. */
+  }
+
+  .brand {
+    grid-column:2/3 /* offset header item column start and end by +1 */
+  }
+
+  header form {
+    grid-column:3/4  /* offset header item column start and end by +1 */
+  }
+
+  .banner {
+    grid-column:1/6; /* offset column start and end by +1 */
+    grid-row: 2/3;
+  }
+
+  main {
+    grid-column:2/4 /* offset column start and end by +1 */
+  }
 }
