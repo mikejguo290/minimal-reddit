@@ -34,3 +34,41 @@ export function checkUrlContainsPostId(url, postId){
     // checks url for inclusion of postId, if so Link is not worth rendering!
     return url.includes(postId);
 }
+
+export function mixPosts(posts){
+    // mix up post ids from each subreddits predictably.
+    // a:[1,2], b:[3,4] => mixed [1,3,2,4]
+    // input = list of post objects
+    // output = mixed list of postIds
+
+  	// javascript to create an array from the property values of objects in a list. 
+  	let subreddits=[];
+  	for (let post of posts){
+        if(subreddits.includes(post.subreddit)){
+        }else{
+            subreddits.push(post.subreddit)
+        }
+    }
+    const aggPostIds = subreddits.map(subreddit => {
+        return {[subreddit]: posts.filter(post => post.subreddit === subreddit).map(post => post.id)}
+    });
+    
+    // expect list like [{'webdev':[1,2]}, {'reactjs':[3,4]},{'funny':[5]}];
+    let postIdsMixed = [];
+    const limit = 10 // limit = 10 posts fetched per API call.
+
+    for (let i=0; i<limit; i++){
+        for (let j=0; j<subreddits.length; j++){ //iterate through each subreddit in list.
+            const subreddit = subreddits[j];
+            try{
+                if(aggPostIds[j][subreddit][i]){ 
+                //access list item first, then with object, use property key - subreddit name, to accesss list of post ids.
+                postIdsMixed.push(aggPostIds[j][subreddit][i]);
+                }
+            }catch(e){
+            /* skip if posts[j][subreddit][i] doesn't exist. */ 
+            }
+        }
+    }
+    return postIdsMixed;
+}
