@@ -395,6 +395,7 @@ aside{
 }
 
 /* error */
+/* for post fetching error AND comments fetching error */
 .errorMessage {
   text-align:center;
   font-weight:bold;

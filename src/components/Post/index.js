@@ -1,5 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Comments } from '../../features/Comments';
+import { selectCommentsError } from '../../features/Comments/commentsSlice';
 import { Link } from 'react-router-dom';
 import { convertNumberToStringThousands, createMarkup , checkUrlIsImage, checkUrlContainsPostId } from '../../utils/helper';
 import ReactTimeAgo from 'react-time-ago';
@@ -27,6 +29,8 @@ export function Post(props){
     const selfTextHtmlExists = selftext_html !=null;
     const urlIsImage = checkUrlIsImage(url);
     const urlContainsPostId = checkUrlContainsPostId(url, id);
+    const commentsError = useSelector(selectCommentsError);
+
     return (
         <div className="post">
             <div className="postVotes">
@@ -43,7 +47,7 @@ export function Post(props){
                     { isPostDetailView && selfTextHtmlExists && <div class="selftextHtml" dangerouslySetInnerHTML={createMarkup(selftext_html)} />}
                     { urlIsImage && <figure><img src={url} alt={`${subreddit_name_prefixed} - ${title}`} /></figure> }
                     { /* render link only if it's not image or postId isn't in the link (which is just a duplicate of page url) */ }
-                    { !urlIsImage && isPostDetailView && !urlContainsPostId && <a className="postedResource" href={url}>{url}</a> }
+                    { isPostDetailView && !urlIsImage && !urlContainsPostId && <a className="postedResource" href={url}>{url}</a> }
                 </div>
                 <div className="postMetaData">
                     <div>
@@ -60,7 +64,8 @@ export function Post(props){
                     </Link>
                 </div>
                 {/* start of comments */}
-                { isPostDetailView && <Comments postId={id}/>}
+                { isPostDetailView && commentsError && <div className="errorMessage">{`${commentsError.message} comments`}</div> }
+                { isPostDetailView && !commentsError && <Comments postId={id}/>}
                 {/* end of comments */}
             </div>
         </div>
