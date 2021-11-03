@@ -19,7 +19,7 @@ const options = {
     initialState:{
         comments:{},
         isLoading:false,
-        hasError:false,
+        error:null,
     }, // comments 's {} is obj with post id for keys and list of replies for the values for each key/post id
     reducers:{
         addComments:(state, action)=>{
@@ -30,15 +30,15 @@ const options = {
     extraReducers:{
         [fetchComments.pending]:(state)=>{
             state.isLoading = true;
-            state.hasError = false;
+            state.error = null;
         },
-        [fetchComments.error]:(state)=>{
+        [fetchComments.rejected]:(state, action)=>{
             state.isLoading = false;
-            state.hasError = true;
+            state.error = action.error;
         },
         [fetchComments.fulfilled]:(state, action)=>{
             state.isLoading = false;
-            state.hasError = false;
+            state.error = null;
             const { postId, comments } = action.payload;
             state.comments[postId] = comments;
         },
@@ -48,5 +48,6 @@ const options = {
 const commentsSlice = createSlice(options);
 
 export const selectComments = state => state.comments.comments; // gives object { postId_x: comments_x, etc }
+export const selectCommentsError = state => state.comments.error; 
 export const { addComments } = commentsSlice.actions;
 export default commentsSlice.reducer;
