@@ -1,7 +1,7 @@
 import React from 'react';
 import { Page } from '../../components/Page';
 import { useParams } from 'react-router-dom';
-import { fetchPostsBySubredditAndPostId, selectPosts , selectHasErrorStatus } from '../../features/Posts/postsSlice';
+import { fetchPostsBySubredditAndPostId, selectPosts , selectPostsError } from '../../features/Posts/postsSlice';
 import { fetchComments } from '../../features/Comments/commentsSlice';
 import { selectSearch } from '../../features/Search/searchSlice';
 import { useEffect } from 'react'
@@ -31,7 +31,7 @@ export function PostDetailsPage(){
 
     const postIds = searchFilteredPost.map(post => post.id);
 
-    const error = useSelector(selectHasErrorStatus); // error is either false or an obj { name, message, stack }
+    const error = useSelector(selectPostsError); // error is either false or an obj { name, message, stack }
     const errorMessage = error? error.message : ''; 
 
     useEffect(()=>{

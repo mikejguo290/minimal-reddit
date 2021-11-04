@@ -3,14 +3,14 @@ import { Subreddits } from '../../features/Subreddits';
 import { Posts } from '../../features/Posts';
 import { Banner } from '../Banner';
 import { useSelector } from 'react-redux';
-import { selectIsLoadingStatus, selectHasErrorStatus } from '../../features/Posts/postsSlice';
+import { selectIsLoadingStatus, selectPostsError } from '../../features/Posts/postsSlice';
 
 export function Page(props){
     const { type, params, postIds } = props;
     const isSubredditPage = type === "subreddit";
     const subRedditName = params.subreddit;
     const isLoading = useSelector(selectIsLoadingStatus);
-    const error = useSelector(selectHasErrorStatus);
+    const error = useSelector(selectPostsError);
     
     return (
         <>  

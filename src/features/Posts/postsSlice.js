@@ -29,30 +29,30 @@ const options = {
     initialState: {
         posts:[], // array of post objects under the property posts.
         isLoading:false,
-        hasError:false,
+        error:null,
     }, 
     reducers:{},
     extraReducers:{
         [fetchPostsBySubreddits.pending]:(state)=>{
             state.isLoading=true;
-            state.hasError=false;
+            state.error=null;
         },
         [fetchPostsBySubreddits.rejected]:(state,action)=>{
             state.isLoading=false;
-            state.hasError=action.error; //if the promise failed and was not handled with rejectWithValue, dispatch the rejected action with a serialized version of the error value as action.error
+            state.error=action.error; //if the promise failed and was not handled with rejectWithValue, dispatch the rejected action with a serialized version of the error value as action.error
         },
         [fetchPostsBySubreddits.fulfilled]:(state, action)=>{
             state.posts = action.payload;
             state.isLoading = false;
-            state.hasError=false;
+            state.error=null;
         },
         [fetchPostsBySubredditAndPostId.pending]:(state)=>{
             state.isLoading=true;
-            state.hasError=false;
+            state.error=null;
         },
         [fetchPostsBySubredditAndPostId.rejected]:(state, action)=>{
             state.isLoading=false;
-            state.hasError=action.error;
+            state.error=action.error;
         },
         [fetchPostsBySubredditAndPostId.fulfilled]:(state, action)=>{
             // if no post id can match the payload.id, only then, add the post in action.payload to state.posts
@@ -62,7 +62,7 @@ const options = {
                 state.posts.push(...action.payload);
             }
             state.isLoading = false;
-            state.hasError = false;
+            state.error = null;
         },
     }
 
@@ -72,7 +72,7 @@ const postsSlice = createSlice(options);
 
 export const selectPosts = state => state.posts.posts;
 export const selectIsLoadingStatus = state => state.posts.isLoading;
-export const selectHasErrorStatus = state => state.posts.hasError;
+export const selectPostsError = state => state.posts.error;
 export default postsSlice.reducer;
 
 
