@@ -36,6 +36,9 @@ body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
+  /* reserve space for scrollbar gutter regardless of overflow status */
+  overflow: scroll;
+  scrollbar-gutter:stable;
 }
 
 /* A elements that don't have a class get default styles */
