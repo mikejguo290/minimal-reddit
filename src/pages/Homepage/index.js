@@ -5,6 +5,7 @@ import { useDispatch, useSelector  } from 'react-redux';
 import { fetchPostsBySubreddits , selectPosts } from '../../features/Posts/postsSlice';
 import { selectSearch } from '../../features/Search/searchSlice';
 import { selectSubreddits } from '../../features/Subreddits/subredditsSlice';
+import { mixPosts } from '../../utils/helper'
 
 export function Homepage(){
     const pageType = "home"
@@ -29,7 +30,7 @@ export function Homepage(){
         }
     });
 
-    const postIds = filteredPosts.map(post => post.id);
+    const postIds = mixPosts(filteredPosts);
 
     return (
         <Page type={pageType} params={params} postIds={postIds} />
