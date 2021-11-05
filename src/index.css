@@ -227,15 +227,16 @@ header form {
   /* 2 rules to stop text items within overflowing */
   min-width: 0;
   overflow:hidden;
-  padding-right: 2em
+  padding-right: 2em;
+  margin-top: 0.5em;
 }
 
 .postContent {
   padding-bottom:1em;
 }
 
-.postContent h3 {
-  margin:1em 0em;
+.postContent .postLink h3 { /* post title in h3, also surrounded by a link */
+  margin: 1em 0em; 
 }
 
 .postContext figure {
@@ -414,6 +415,11 @@ aside{
   /* don't have to define grid-column for the other grid item - aside  */
   aside {
     align-self:start;
+  }
+
+  .postVotes { 
+    /* more space allocated to left hand strip for post upvotes for bigger font-size at tablet screen size */
+    min-width:4em;
   }
 }
 
