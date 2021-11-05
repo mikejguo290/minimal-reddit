@@ -1,9 +1,11 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { Subreddits } from '../../features/Subreddits';
 import { Posts } from '../../features/Posts';
 import { Banner } from '../Banner';
-import { useSelector } from 'react-redux';
 import { selectIsLoadingStatus, selectPostsError } from '../../features/Posts/postsSlice';
+import { clearSearchTerm } from '../../features/Search/searchSlice';
 
 export function Page(props){
     const { type, params, postIds } = props;
@@ -11,7 +13,13 @@ export function Page(props){
     const subRedditName = params.subreddit;
     const isLoading = useSelector(selectIsLoadingStatus);
     const error = useSelector(selectPostsError);
-    
+    const dispatch = useDispatch();
+
+    useEffect(()=>{
+        // clear search term whenever user navigates to a different page/url.
+        dispatch(clearSearchTerm());
+    },[dispatch, params.subreddit, params.postId]);
+
     return (
         <>  
             { isSubredditPage && <Banner name={subRedditName}/>}
