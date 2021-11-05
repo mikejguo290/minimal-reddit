@@ -44,7 +44,7 @@ export function Post(props){
                     <Link to={permalink} className="postLink">
                         <h3>{title}</h3>
                     </Link>
-                    { isPostDetailView && selfTextHtmlExists && <div class="selftextHtml" dangerouslySetInnerHTML={createMarkup(selftext_html)} />}
+                    { isPostDetailView && selfTextHtmlExists && <div className="selftextHtml" dangerouslySetInnerHTML={createMarkup(selftext_html)} />}
                     { urlIsImage && <figure><img src={url} alt={`${subreddit_name_prefixed} - ${title}`} /></figure> }
                     { /* render link only if it's not image or postId isn't in the link (which is just a duplicate of page url) */ }
                     { isPostDetailView && !urlIsImage && !urlContainsPostId && <a className="postedResource" href={url}>{url}</a> }
