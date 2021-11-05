@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react'
 import { selectSearch } from '../../features/Search/searchSlice';
 import { fetchPostsBySubreddits , selectPosts , selectPostsError} from '../../features/Posts/postsSlice';
+import { selectComments } from '../../features/Comments/commentsSlice';
+
 import { useDispatch , useSelector  } from 'react-redux'
 
 export function SubredditPage(){
@@ -31,17 +33,23 @@ export function SubredditPage(){
 
     const dispatch = useDispatch();
     const error = useSelector(selectPostsError);
-  
+    const comments = useSelector(selectComments); // { postIdx: [comments of post x]}
+    const commentIds = Object.keys(comments) // returns list of postIds 
+   
+    const commentMatchPost = subredditPosts.find(post => post.id === commentIds[0] )? true: false;
+
     useEffect(()=>{
-        if( !error && subredditPosts.length ===0){
-            // if subreddit posts equal to 0, (assuming this reddit's posts are not loaded in inital api call)
-            // call api to get that subreddit's posts. 
-            // unless there is a fetch post error, in which case do not execute callback in effect.  
-            
-            // what if subreddit has one or zero post? 
+        // if subreddit posts equal to 0, (assuming this reddit's posts are not loaded in inital api call)
+        // if subredditPosts equal to 1 and comment matches post id (assuming this is loading data for a specific post by landing on the url for that post first thing)
+        // call api to get that subreddit's posts. 
+        // unless there is a fetch post error, in which case do not execute callback in effect.  
+        if( !error && subredditPosts.length === 0 ){
             dispatch(fetchPostsBySubreddits([subreddit]));
         }
-    },[error, subreddit,subredditPosts, dispatch]);
+        if( !error && subredditPosts.length === 1 && commentMatchPost ){
+            dispatch(fetchPostsBySubreddits([subreddit]));
+        }
+    },[error, subreddit,subredditPosts, commentMatchPost, dispatch]);
 
     return (
         <Page type={pageType} params={params} postIds={postIds} />
