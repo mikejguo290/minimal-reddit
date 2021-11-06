@@ -56,10 +56,10 @@ export function Post(props){
                     <ReactTimeAgo date={created_utc*1000} locale="en-GB" timeStyle="mini-minute-now"/>
                     <Link to={permalink} className="postLink">
                         <div className="commentNumberContainer">
-                            <p>{num_comments}</p>
                             <span className="material-icons-outlined">
                                 comment
                             </span>
+                            <p>{num_comments}</p>
                         </div>
                     </Link>
                 </div>
