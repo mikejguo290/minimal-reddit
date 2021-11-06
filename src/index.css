@@ -170,12 +170,12 @@ header form {
   flex-grow:1;
 }
 
-.emptySearchResult {
+.noSearchResult {
   text-align:center;
   margin: 2em 1em;
 }
 
-.emptySearchResult .resetSearch {
+.noSearchResult .resetSearch {
   margin: 1em;
   padding: 0.5em;
   color:ghostwhite;
