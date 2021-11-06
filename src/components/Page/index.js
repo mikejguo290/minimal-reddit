@@ -50,8 +50,10 @@ export function Page(props){
             { isSubredditPage && <Banner name={subreddit}/>}
             <main>  
                 <div className="feed">
-                    { error && <div className="errorMessage">{error.message}</div> }
-                    { !error && <Posts  pageType={type} postIds={postIds} /> }
+                    { error
+                        ? <div className="errorMessage">{error.message}</div>
+                        : <Posts  pageType={type} postIds={postIds} /> 
+                    }
                 </div>
             </main>
             <aside>
