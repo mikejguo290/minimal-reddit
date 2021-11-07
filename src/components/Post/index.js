@@ -31,6 +31,23 @@ export function Post(props){
     const urlContainsPostId = checkUrlContainsPostId(url, id);
     const commentsError = useSelector(selectCommentsError);
 
+    // JSX elements to be rendered
+    const bodyImage = urlIsImage && <figure><img src={url} alt={`${subreddit_name_prefixed} - ${title}`} /></figure>;
+    let bodyText;
+    let resourceLink;
+    let commentsSection;
+    if(isPostDetailView){
+        // show these fields only if the post shows on a detail page.
+        // a lot of data validation goes even AFTER the loading is done. Can't skip these even when using loading state. 
+        bodyText = selfTextHtmlExists && <div className="selftextHtml" dangerouslySetInnerHTML={createMarkup(selftext_html)} />
+        // render link only if it's not image or postId isn't in the link (which is just a duplicate of page url)
+        resourceLink = !urlIsImage && !urlContainsPostId && <a className="postedResource" href={url}>{url}</a>
+        // comments section is either an error message if error loading comments or the Comments component.
+        commentsSection = commentsError
+            ?<div className="errorMessage">{`${commentsError.message} comments`}</div>
+            :<Comments postId={id}/>
+    }
+
     return (
         <div className="post">
             <div className="postVotes">
@@ -44,10 +61,10 @@ export function Post(props){
                     <Link to={permalink} className="postLink">
                         <h3>{title}</h3>
                     </Link>
-                    { isPostDetailView && selfTextHtmlExists && <div className="selftextHtml" dangerouslySetInnerHTML={createMarkup(selftext_html)} />}
-                    { urlIsImage && <figure><img src={url} alt={`${subreddit_name_prefixed} - ${title}`} /></figure> }
+                    { bodyText }
+                    { bodyImage }
                     { /* render link only if it's not image or postId isn't in the link (which is just a duplicate of page url) */ }
-                    { isPostDetailView && !urlIsImage && !urlContainsPostId && <a className="postedResource" href={url}>{url}</a> }
+                    { resourceLink }
                 </div>
                 <div className="postMetaData">
                     <div>
@@ -64,8 +81,7 @@ export function Post(props){
                     </Link>
                 </div>
                 {/* start of comments */}
-                { isPostDetailView && commentsError && <div className="errorMessage">{`${commentsError.message} comments`}</div> }
-                { isPostDetailView && !commentsError && <Comments postId={id}/>}
+                { commentsSection }
                 {/* end of comments */}
             </div>
         </div>
