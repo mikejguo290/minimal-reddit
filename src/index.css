@@ -367,7 +367,11 @@ aside{
   width:30px;
 }
 
-.subreddit h3{
+.subredditIcon {
+  border-radius:50%;
+}
+
+.subreddit h3 {
   margin-left:0.5em;
 }
 
