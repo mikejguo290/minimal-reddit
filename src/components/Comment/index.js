@@ -5,6 +5,8 @@ import ReactTimeAgo from 'react-time-ago';
 export function Comment(props){
     const {author, body_html, created_utc, score } = props.data;
     const bodyHtmlExists = body_html !=null;
+    const bodyText = bodyHtmlExists && <div className="commentBodyHtml" dangerouslySetInnerHTML={createMarkup(body_html)} />
+
     return (
         <article className="comment">
             <div className="commentData">
@@ -12,7 +14,7 @@ export function Comment(props){
                 <ReactTimeAgo date={created_utc*1000} locale="en-GB" timeStyle="mini-minute-now"/>
             </div>
             <div>
-                { bodyHtmlExists && <div className="commentBodyHtml" dangerouslySetInnerHTML={createMarkup(body_html)} />}
+                { bodyText }
                 <p className="commentKarma">{ `${score} Karma` }</p>
             </div>
         </article>
