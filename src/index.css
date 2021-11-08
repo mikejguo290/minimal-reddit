@@ -387,6 +387,19 @@ aside{
   margin: 2em 1em;
 }
 
+/* NotFound component for when url doesn't match anything in React Router on App.js*/
+.notFound {
+  margin:2em;
+  text-align:center;
+}
+
+.notFound button {
+  margin: 1em;
+  padding: 0.5em;
+  color:ghostwhite;
+  font-weight:bold;
+  background-color:#FF5700;
+}
 
 @media screen and (min-width: 320px){
   html {font-size:calc(12px + 4*((100vw - 320px)/(768 - 320)))}

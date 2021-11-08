@@ -4,6 +4,7 @@ import { Homepage } from '../pages/Homepage';
 import { SubredditPage } from '../pages/SubredditPage';
 import { PostDetailsPage } from '../pages/PostDetailsPage';
 import { BrowserRouter as Router , Route, Switch } from 'react-router-dom';
+import { NotFoundPage } from '../pages/NotFoundPage';
 import store from './store';
 import { Provider } from 'react-redux';
 
@@ -22,6 +23,9 @@ function App() {
             </Route>
             <Route path="/" exact>
               <Homepage />
+            </Route>
+            <Route path="*">
+              <NotFoundPage />
             </Route>
           </Switch>
         </Router>
