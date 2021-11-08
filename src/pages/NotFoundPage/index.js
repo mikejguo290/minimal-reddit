@@ -1,5 +1,6 @@
 import React from 'react';
 import { PageTemplate } from '../../components/PageTemplate';
+import { Link } from 'react-router-dom';
 
 export const NotFoundPage = () => {
     /* 
@@ -13,7 +14,9 @@ export const NotFoundPage = () => {
             <PageTemplate>
                     <div className="notFound">  
                         <h3>{errorMessage}</h3>
-                        <button>Start again</button>
+                        <Link to="/">
+                            <button>Start again</button>
+                        </Link>
                     </div>
             </PageTemplate>
         </>
