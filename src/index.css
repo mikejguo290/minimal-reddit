@@ -149,6 +149,10 @@ header form {
   width:30px;
 }
 
+.logo img {
+  border-radius:50%;
+}
+
 .appName {
   display:none;
   margin-left:0.5em;
