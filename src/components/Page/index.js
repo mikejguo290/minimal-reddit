@@ -47,7 +47,15 @@ export function Page(props){
 
     return (
         <>  
-            { isSubredditPage && <Banner name={subreddit}/>}
+            {/* display the subreddit page banner with subreddit name if it is valid.
+            i.e. there was no error with fetching the Posts. 
+            else do not display a banner.*/}
+
+            { error 
+                ? <></>
+                : isSubredditPage && <Banner name={subreddit} />
+            }
+
             <main>  
                 <div className="feed">
                     { error
