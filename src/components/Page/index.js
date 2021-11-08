@@ -1,4 +1,5 @@
 import React from 'react';
+import { PageTemplate } from '../PageTemplate';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 import { Subreddits } from '../../features/Subreddits';
@@ -56,17 +57,12 @@ export function Page(props){
                 : isSubredditPage && <Banner name={subreddit} />
             }
 
-            <main>  
-                <div className="feed">
+           <PageTemplate>
                     { error
                         ? <div className="errorMessage">{error.message}</div>
                         : <Posts  pageType={type} postIds={postIds} /> 
                     }
-                </div>
-            </main>
-            <aside>
-                <Subreddits />
-            </aside>
+            </PageTemplate>
         </>
     )
 }
