@@ -1,12 +1,11 @@
 import React from 'react';
 import { Page } from '../../components/Page';
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react';
 import { selectSearch } from '../../features/Search/searchSlice';
 import { fetchPostsBySubreddits , selectPosts , selectPostsError} from '../../features/Posts/postsSlice';
 import { selectComments } from '../../features/Comments/commentsSlice';
-
-import { useDispatch , useSelector  } from 'react-redux'
+import { useDispatch , useSelector  } from 'react-redux';
 
 export function SubredditPage(){
     /* 
@@ -50,6 +49,7 @@ export function SubredditPage(){
     const commentIds = Object.keys(comments) // returns list of postIds 
     const commentMatchPost = subredditPosts.find(post => post.id === commentIds[0] )? true: false;
 
+    const prevSubreddit = useRef();
     useEffect(()=>{
         // if subreddit posts equal to 0, (assuming this reddit's posts are not loaded in inital api call)
         // if subredditPosts equal to 1 and comment matches post id (assuming this is loading data for a specific post by landing on the url for that post first thing)
@@ -61,8 +61,14 @@ export function SubredditPage(){
         if( !error && subPostsInStore === 1 && commentMatchPost ){
             dispatch(fetchPostsBySubreddits([subreddit]));
         }
+        // if error AND subreddit param in the url has changed. dispatch C.A.T to fetch subreddit posts. 
+        // this allows the user to click around after first trying to access an invalid api endpoint with their own url.
+        if ( error && subreddit !== prevSubreddit.current ){
+            dispatch(fetchPostsBySubreddits([subreddit]));
+        }
+        prevSubreddit.current = subreddit;
     },[error, subreddit, subPostsInStore, commentMatchPost, dispatch]);
-
+    console.log(prevSubreddit.current);
     return (
         <Page type={pageType} params={params} postIds={postIds} />
     );
