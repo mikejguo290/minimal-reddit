@@ -48,6 +48,7 @@ const options = {
 const commentsSlice = createSlice(options);
 
 export const selectComments = state => state.comments.comments; // gives object { postId_x: comments_x, etc }
+export const selectCommentsIsLoading = state => state.comments.isLoading; 
 export const selectCommentsError = state => state.comments.error; 
 export const { addComments } = commentsSlice.actions;
 export default commentsSlice.reducer;
