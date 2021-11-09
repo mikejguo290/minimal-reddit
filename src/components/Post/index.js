@@ -1,10 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Comments } from '../../features/Comments';
 import { selectCommentsError } from '../../features/Comments/commentsSlice';
-import { Link } from 'react-router-dom';
+import { selectIsLoadingStatus } from '../../features/Posts/postsSlice';
 import { convertNumberToStringThousands, createMarkup , checkUrlIsImage, checkUrlContainsPostId } from '../../utils/helper';
 import ReactTimeAgo from 'react-time-ago';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'
 
 export function Post(props){
     const {
@@ -30,9 +33,11 @@ export function Post(props){
     const urlIsImage = checkUrlIsImage(url);
     const urlContainsPostId = checkUrlContainsPostId(url, id);
     const commentsError = useSelector(selectCommentsError);
-
+    const loading = useSelector(selectIsLoadingStatus);
+   
     // JSX elements to be rendered
     const bodyImage = urlIsImage && <figure><img src={url} alt={`${subreddit_name_prefixed} - ${title}`} /></figure>;
+    const redditVotes = convertNumberToStringThousands(votes);
     let bodyText;
     let resourceLink;
     let commentsSection;
@@ -51,31 +56,33 @@ export function Post(props){
     return (
         <div className="post">
             <div className="postVotes">
-                <p>{convertNumberToStringThousands(votes)}</p>
+                <p>{ loading? <Skeleton width={"2em"}/> : redditVotes }</p>
             </div>
             <div className="postContext">
                 <div className="postContent">
                     <Link to={`/r/${subreddit}`} >
-                        <p className='postSubreddit'>{subreddit_name_prefixed}</p>
+                        <p className='postSubreddit'>{ loading? <Skeleton width={"4em"}/> : subreddit_name_prefixed }</p>
                     </Link>
                     <Link to={permalink} className="postLink">
-                        <h3>{title}</h3>
+                        <h3>{ loading? <Skeleton height={"1.17em"} width={"50%"}/> : title }</h3>
                     </Link>
-                    { bodyText }
-                    { bodyImage }
+                    { loading? <Skeleton/> : bodyText } 
+                    { loading? <Skeleton/> : bodyImage }
                     { /* render link only if it's not image or postId isn't in the link (which is just a duplicate of page url) */ }
-                    { resourceLink }
+                    { loading? <Skeleton/> : resourceLink }
                 </div>
                 <div className="postMetaData">
                     <div>
-                        <p>By {author}</p>
+                        <p>{loading? <Skeleton width={"6em"} /> : `By ${author}` }</p>
                     </div>
-                    <ReactTimeAgo date={created_utc*1000} locale="en-GB" timeStyle="mini-minute-now"/>
-                    <Link to={permalink} className="postLink">
+                    {loading? <Skeleton width={"2em"} /> :<ReactTimeAgo date={created_utc*1000} locale="en-GB" timeStyle="mini-minute-now"/>}
+                    {loading && <Skeleton width={'4em'} />}
+                    <Link to={permalink} className="postLink" style={{display:loading? 'none': 'undefined'}}>
                         <div className="commentNumberContainer">
                             <span className="material-icons-outlined">
                                 comment
                             </span>
+                            
                             <p>{num_comments}</p>
                         </div>
                     </Link>
