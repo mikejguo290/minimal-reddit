@@ -7,17 +7,21 @@ import { Posts } from '../../features/Posts';
 import { Banner } from '../Banner';
 import { selectIsLoadingStatus, selectPostsError } from '../../features/Posts/postsSlice';
 import { clearSearchTerm, selectSearch } from '../../features/Search/searchSlice';
+import { NoSearchResults } from '../NoSearchResults';
 
 export function Page(props){
     const { type, params, postIds } = props;
+    const dispatch = useDispatch();
     const isSubredditPage = type === "subreddit";
     const subreddit = params.subreddit;
     const postId = params.postId;
     const isLoading = useSelector(selectIsLoadingStatus);
     const error = useSelector(selectPostsError);
     
+    // only show NoSearchResults component if BOTH search term exists and list of PostIds is empty (it has already filtered by searchTerm on parent page);
     const searchTerm = useSelector(selectSearch);
-    const dispatch = useDispatch();
+    const filteredPostsIsEmpty = postIds.length === 0;
+    const showNoSearchResults = searchTerm && filteredPostsIsEmpty;
     
     const usePrevious = (value) =>{
         // custom hook to get previous value of argument.
@@ -60,7 +64,10 @@ export function Page(props){
            <PageTemplate>
                     { error
                         ? <div className="errorMessage">{error.message}</div>
-                        : <Posts  pageType={type} postIds={postIds} /> 
+                        :<>
+                            <Posts  pageType={type} postIds={postIds} /> 
+                            { showNoSearchResults && <NoSearchResults/> }
+                        </>
                     }
             </PageTemplate>
         </>
