@@ -64,10 +64,10 @@ export function Post(props){
             <div className="postContext">
                 <div className="postContent">
                     <Link to={`/r/${subreddit || ''}`} >
-                        <p className='postSubreddit'>{ loading? <Skeleton width={"4em"}/> : subreddit_name_prefixed }</p>
+                        <p className='postSubreddit'>{ subreddit_name_prefixed || <Skeleton width={"4em"}/> }</p>
                     </Link>
                     <Link to={permalink || ''} className="postLink">
-                        <h3>{ loading? <Skeleton height={"1.17em"} width={"50%"}/> : title }</h3>
+                        <h3>{ title || <Skeleton height={"1.17em"} width={"70%"}/> }</h3>
                     </Link>
                     { loading? <Skeleton/> : bodyText } 
                     { loading? <Skeleton/> : bodyImage }
