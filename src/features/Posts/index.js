@@ -1,17 +1,16 @@
 import React from 'react';
 import { Post } from '../../components/Post';
 import { useSelector } from 'react-redux';
-import { selectPosts } from './postsSlice';
-import { NoSearchResults } from '../../components/NoSearchResults';
+import { selectPosts, selectIsLoadingStatus } from './postsSlice';
+import { SkeletonPostsList } from '../../skeletons/SkeletonPostsList';
 
 export function Posts (props){
     
     const { pageType, postIds } = props;
     const allPosts = useSelector(selectPosts);
-    
+    const loading = useSelector(selectIsLoadingStatus);
     // filter posts by the criteria that postIds array includes post.id 
     const filteredPosts = allPosts.filter(post => postIds.includes(post.id));
-    const filteredPostsIsEmpty = filteredPosts.length===0;
 
     let idsIndex={} // first create the dictionary to try and optimise the array.sort compare function.
     for (const [index, postId] of postIds.entries()){ 
@@ -27,14 +26,19 @@ export function Posts (props){
         return filteredPost.find(post => post.id===postId);
     });
     */
-
     return (
         <div className="posts">
-            <ul className="postsList">
-                {posts.map(post => <li key={post.id}><Post data={post} pageType={pageType}/></li>)}
-            </ul>
-            { /* loading state has to take into account filteredPosts will be momentarily empty */}
-            { filteredPostsIsEmpty && <NoSearchResults/>}
+            {
+                loading
+                ?   <ul className="postsList">
+                        <SkeletonPostsList pageType={pageType} />
+                    </ul>
+                :<>
+                    <ul className="postsList">
+                        {posts.map(post => <li key={post.id}><Post data={post} pageType={pageType}/></li>)}
+                    </ul>
+                </>
+            }
         </div>
     );
 }
