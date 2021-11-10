@@ -47,7 +47,7 @@ export function mixPosts(posts){
     // input = list of post objects
     // output = mixed list of postIds
 
-  	// javascript to create an array from the property values of objects in a list. 
+  	// create an array of subreddit names from the subreddit property of post objects. 
   	let subreddits=[];
   	for (let post of posts){
         if(subreddits.includes(post.subreddit)){
@@ -55,11 +55,11 @@ export function mixPosts(posts){
             subreddits.push(post.subreddit)
         }
     }
+    // create list like [{'webdev':[1,2]}, {'reactjs':[3,4]},{'funny':[5]}];
     const aggPostIds = subreddits.map(subreddit => {
         return {[subreddit]: posts.filter(post => post.subreddit === subreddit).map(post => post.id)}
     });
     
-    // expect list like [{'webdev':[1,2]}, {'reactjs':[3,4]},{'funny':[5]}];
     let postIdsMixed = [];
     const limit = 10 // limit = 10 posts fetched per API call.
 
