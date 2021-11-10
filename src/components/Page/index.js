@@ -2,10 +2,9 @@ import React from 'react';
 import { PageTemplate } from '../PageTemplate';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
-import { Subreddits } from '../../features/Subreddits';
 import { Posts } from '../../features/Posts';
 import { Banner } from '../Banner';
-import { selectIsLoadingStatus, selectPostsError } from '../../features/Posts/postsSlice';
+import { selectPostsError } from '../../features/Posts/postsSlice';
 import { clearSearchTerm, selectSearch } from '../../features/Search/searchSlice';
 import { NoSearchResults } from '../NoSearchResults';
 
@@ -15,7 +14,6 @@ export function Page(props){
     const isSubredditPage = type === "subreddit";
     const subreddit = params.subreddit;
     const postId = params.postId;
-    const isLoading = useSelector(selectIsLoadingStatus);
     const error = useSelector(selectPostsError);
     
     // only show NoSearchResults component if BOTH search term exists and list of PostIds is empty (it has already filtered by searchTerm on parent page);

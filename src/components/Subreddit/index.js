@@ -1,4 +1,3 @@
-import redditImage from '../../images/reddit.jpeg';
 import React from 'react';
 
 export function Subreddit(props){

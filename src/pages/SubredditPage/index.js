@@ -68,7 +68,7 @@ export function SubredditPage(){
         }
         prevSubreddit.current = subreddit;
     },[error, subreddit, subPostsInStore, commentMatchPost, dispatch]);
-    console.log(prevSubreddit.current);
+   
     return (
         <Page type={pageType} params={params} postIds={postIds} />
     );

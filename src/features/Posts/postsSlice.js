@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { addComments } from '../Comments/commentsSlice';
 import redditAPI from '../../utils/redditAPI';
 
 // returns list of posts from each subreddit merged into an overall list. 
