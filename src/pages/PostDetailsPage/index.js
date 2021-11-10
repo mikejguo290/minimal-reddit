@@ -2,7 +2,7 @@ import React from 'react';
 import { Page } from '../../components/Page';
 import { useParams } from 'react-router-dom';
 import { fetchPostsBySubredditAndPostId, selectPosts , selectPostsError } from '../../features/Posts/postsSlice';
-import { fetchComments } from '../../features/Comments/commentsSlice';
+import { fetchComments, clearComments } from '../../features/Comments/commentsSlice';
 import { selectSearch } from '../../features/Search/searchSlice';
 import { useEffect, useLayoutEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -35,6 +35,12 @@ export function PostDetailsPage(){
     const errorMessage = error? error.message : ''; 
     
     useLayoutEffect(()=>{
+        // clear comments in store before component is mounted. 
+        // This is to stop state comment data flickering before loading begins. 
+        dispatch(clearComments());
+    },[dispatch]);
+
+    useEffect(()=>{
         // if the post isn't in list of posts. make an api call. else, pass on filtered post as props down to be rendered by Posts component. 
         // this means the app renders posts in subreddits quickly for the PostDetailsPage, going back to subreddits page. 
         // and can also deal with users who try the url route. saved pages. similarity to reddit urls etc. 
@@ -43,8 +49,7 @@ export function PostDetailsPage(){
         }
     },[dispatch, subreddit, postId, filteredPost.length, errorMessage]);
 
-    useLayoutEffect(()=>{
-        // useLayoutEffect instead of useEffect to stop the glitching when reloading. 
+    useEffect(()=>{
         dispatch(fetchComments({subreddit:subreddit, postId:postId}));
     },[dispatch, subreddit,postId]);
 
