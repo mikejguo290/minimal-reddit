@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { fetchPostsBySubredditAndPostId, selectPosts , selectPostsError } from '../../features/Posts/postsSlice';
 import { fetchComments } from '../../features/Comments/commentsSlice';
 import { selectSearch } from '../../features/Search/searchSlice';
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 export function PostDetailsPage(){
@@ -33,8 +33,8 @@ export function PostDetailsPage(){
 
     const error = useSelector(selectPostsError); // error is either false or an obj { name, message, stack }
     const errorMessage = error? error.message : ''; 
-
-    useEffect(()=>{
+    
+    useLayoutEffect(()=>{
         // if the post isn't in list of posts. make an api call. else, pass on filtered post as props down to be rendered by Posts component. 
         // this means the app renders posts in subreddits quickly for the PostDetailsPage, going back to subreddits page. 
         // and can also deal with users who try the url route. saved pages. similarity to reddit urls etc. 
@@ -43,7 +43,8 @@ export function PostDetailsPage(){
         }
     },[dispatch, subreddit, postId, filteredPost.length, errorMessage]);
 
-    useEffect(()=>{
+    useLayoutEffect(()=>{
+        // useLayoutEffect instead of useEffect to stop the glitching when reloading. 
         dispatch(fetchComments({subreddit:subreddit, postId:postId}));
     },[dispatch, subreddit,postId]);
 
