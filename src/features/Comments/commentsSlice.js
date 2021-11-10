@@ -25,6 +25,9 @@ const options = {
         addComments:(state, action)=>{
             const { postId, comments } = action.payload; 
             state.comments[postId] = comments;
+        },
+        clearComments:(state) => {
+            state.comments={};
         }
     },
     extraReducers:{
@@ -50,5 +53,5 @@ const commentsSlice = createSlice(options);
 export const selectComments = state => state.comments.comments; // gives object { postId_x: comments_x, etc }
 export const selectCommentsIsLoading = state => state.comments.isLoading; 
 export const selectCommentsError = state => state.comments.error; 
-export const { addComments } = commentsSlice.actions;
+export const { addComments , clearComments } = commentsSlice.actions;
 export default commentsSlice.reducer;
