@@ -1,13 +1,13 @@
 import React from 'react';
 import { Comment } from '../../components/Comment';
 import { useSelector } from 'react-redux';
-import { selectComments } from './commentsSlice';
+import { selectComments, selectCommentsIsLoading } from './commentsSlice';
 
 export function Comments(props){
     /* comments will have to make a call to fetch reddit comments associated with one particular post. */
     // expect subreddit, postId, author, comment text, posted time
     const AllComments = useSelector(selectComments);
-    
+    const loading = useSelector(selectCommentsIsLoading);
     const comments = AllComments[props.postId]? AllComments[props.postId]:[]; 
     // comments is initiall undefined which cannot be mapped. 
     // if commentsSlice's initial value was [], it would have been fine without the above line of code.
@@ -16,7 +16,15 @@ export function Comments(props){
     return (
         <div className="comments">
             <ul className="commentsList">
-                { comments.map(comment => {
+                { 
+                    loading
+                    ? <>
+                        {/* extract this into a SkeletonCommentsList */}
+                        <li key={1}><Comment data={{}}/></li>
+                        <li key={2}><Comment data={{}}/></li>
+                        <li key={3}><Comment data={{}}/></li>
+                    </>
+                    : comments.map(comment => {
                         return <li key={comment.id}><Comment data={comment}/></li>
                     })
                 }
