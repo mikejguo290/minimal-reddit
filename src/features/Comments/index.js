@@ -2,6 +2,7 @@ import React from 'react';
 import { Comment } from '../../components/Comment';
 import { useSelector } from 'react-redux';
 import { selectComments, selectCommentsIsLoading } from './commentsSlice';
+import { SkeletonCommentsList } from '../../skeletons/SkeletonCommentsList';
 
 export function Comments(props){
     /* comments will have to make a call to fetch reddit comments associated with one particular post. */
@@ -18,12 +19,7 @@ export function Comments(props){
             <ul className="commentsList">
                 { 
                     loading
-                    ? <>
-                        {/* extract this into a SkeletonCommentsList */}
-                        <li key={1}><Comment data={{}}/></li>
-                        <li key={2}><Comment data={{}}/></li>
-                        <li key={3}><Comment data={{}}/></li>
-                    </>
+                    ? <SkeletonCommentsList />
                     : comments.map(comment => {
                         return <li key={comment.id}><Comment data={comment}/></li>
                     })
