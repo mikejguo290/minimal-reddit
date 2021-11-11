@@ -62,7 +62,6 @@ export function SubredditPage(){
         // call api to get that subreddit's posts. 
         // unless there is a fetch post error, in which case do not execute callback in effect.  
         if( !error && subPostsInStore === 0 ){
-            console.log('making a call because there are zero store posts.');
             dispatch(fetchPostsBySubreddits([subreddit]));
         }
         if( !error && subPostsInStore === 1 && commentMatchPost ){
@@ -75,10 +74,6 @@ export function SubredditPage(){
                 state:{ error: error}
             }) // imperatively redirect to NotFoundPage. 
         }
-
-        // *** return cleanup on component dismount to reset posts loading error state in store.
-        // flickering so useLayoutEffect? 
-        // clean up unnecessary bits. 
 
     },[error, subreddit, subPostsInStore, commentMatchPost, history, dispatch]);
    
