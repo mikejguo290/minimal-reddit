@@ -20,6 +20,16 @@ export const fetchPostsBySubredditAndPostId = createAsyncThunk(
         const data = await redditAPI.getPostDetail(subreddit, postId);
         const posts = data.posts;
         return posts;
+    },{
+        condition:({subreddit, postId}, {getState})=>{
+            // if there is already a post with the same id in store, cancel thunk BEFORE payload creator is called.
+            // no action will be dispatched. 
+            const {posts} = getState();
+            const matchingPost = posts.posts.filter(post => post.id === postId);
+            if(matchingPost.length > 0){
+                return false;
+            }
+        }
     }
 );
 
