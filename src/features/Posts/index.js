@@ -5,25 +5,29 @@ import { selectPosts, selectIsLoadingStatus } from './postsSlice';
 import { SkeletonPostsList } from '../../skeletons/SkeletonPostsList';
 
 export function Posts (props){
-    
+    /* Posts takes props passed in by Page and uses props.postIds to sort list of posts 
+    from the store. before mapping the sorted list into an array of Post components.
+    if the status of fetch posts API call is loading. render a loading skeleton of Posts. 
+    */
     const { pageType, postIds } = props;
-    const allPosts = useSelector(selectPosts);
+    let posts = useSelector(selectPosts);
     const loading = useSelector(selectIsLoadingStatus);
-    // filter posts by the criteria that postIds array includes post.id 
-    const filteredPosts = allPosts.filter(post => postIds.includes(post.id));
 
-    // sort posts with their ids, in order of their id's position in postIds array. //
+    // sort posts with their ids, in order of their id's position in postIds array.
     
-    let idsIndex={} // first create the dictionary to optimise the array.sort compare function.
+    // first create the dictionary to optimise the array.sort compare function.
+    let idsIndex={} 
     for (const [index, postId] of postIds.entries()){ 
         idsIndex[postId]=index;
     }
-    const posts = [...filteredPosts]; //array.sort() sorts in-place which React won't allow, because sorting result of useSelector would change the store. 
-    //pseudocode: const sortedPosts = allPosts.sort((a,b)=> #index of a.id in orderList - #index of b.id in orderList );
+    
+    // filter posts by the criteria that postIds array includes post.id 
+    posts = posts.filter(post => postIds.includes(post.id));
+    //pseudocode: const sortedPosts = posts.sort((a,b)=> #index of a.id in orderList - #index of b.id in orderList );
     posts.sort((a,b)=> idsIndex[a.id] - idsIndex[b.id]); 
 
-    /* alternative implementation of sort
-    const posts = postIds.map(postId => filteredPost.find(post => post.id===postId)); */
+    /* alternative implementation of sort (without the dictionary setup)
+    posts = postIds.map(postId => filteredPost.find(post => post.id===postId)); */
 
     return (
         <div className="posts">
@@ -32,11 +36,10 @@ export function Posts (props){
                 ?   <ul className="postsList">
                         <SkeletonPostsList pageType={pageType} />
                     </ul>
-                :<>
+                :
                     <ul className="postsList">
                         {posts.map(post => <li key={post.id}><Post data={post} pageType={pageType}/></li>)}
                     </ul>
-                </>
             }
         </div>
     );
