@@ -1,4 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
+export const clearSearch = createAsyncThunk(
+    // dispatch thunk to clear searchTerm only when there is a search term value.
+    // no async function within but making use of the middleware. 
+    // works together with useEffect in Page component to create the function clear search on page change (when search term is set.)
+    'search/clearSearch',
+    (arg,thunkAPI)=>{
+        thunkAPI.dispatch(setSearchTerm(''));
+    },{
+        condition:(arg, {getState,extras})=>{
+            const { search } = getState()
+            const searchTerm = search.value;
+            if(!searchTerm){
+                return false;
+            }
+        }
+    }
+);
 
 const options = {
     name: 'search',
