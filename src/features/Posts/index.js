@@ -12,7 +12,9 @@ export function Posts (props){
     // filter posts by the criteria that postIds array includes post.id 
     const filteredPosts = allPosts.filter(post => postIds.includes(post.id));
 
-    let idsIndex={} // first create the dictionary to try and optimise the array.sort compare function.
+    // sort posts with their ids, in order of their id's position in postIds array. //
+    
+    let idsIndex={} // first create the dictionary to optimise the array.sort compare function.
     for (const [index, postId] of postIds.entries()){ 
         idsIndex[postId]=index;
     }
@@ -20,12 +22,9 @@ export function Posts (props){
     //pseudocode: const sortedPosts = allPosts.sort((a,b)=> #index of a.id in orderList - #index of b.id in orderList );
     posts.sort((a,b)=> idsIndex[a.id] - idsIndex[b.id]); 
 
-     /*
-    // alternative implementation of sort
-    const posts = postIds.map(postId=>{
-        return filteredPost.find(post => post.id===postId);
-    });
-    */
+    /* alternative implementation of sort
+    const posts = postIds.map(postId => filteredPost.find(post => post.id===postId)); */
+
     return (
         <div className="posts">
             {
