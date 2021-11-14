@@ -8,6 +8,10 @@ import { useLayoutEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 export function PostDetailsPage(){
+    /* PostDetailsPage extracts subreddit name and postId from the page's url params, 
+    it passes subreddit, postId, along with a list of postIds that match postId  
+    and which contains searchTerm to the Page component. (if no posts fetching errors are encountered.) */
+
     const pageType = "detail";
     const { subreddit, postId } = useParams();
     const dispatch = useDispatch();
@@ -26,14 +30,16 @@ export function PostDetailsPage(){
   
     // UseLayoutEffect runs before component paints. This is to stop state comment data flickering before loading begins. 
     useLayoutEffect(()=>{
+        // effect works together with logic in thunk action creator in postsSlice to cancel action being 
+        // dispatched to the store if there is a Post with matching id in store.
         if(error === null){
             dispatch(fetchPostsBySubredditAndPostId({subreddit:subreddit, postId:postId}));
         }
     },[dispatch, subreddit, postId, error]);
 
     useLayoutEffect(()=>{
-        dispatch(fetchComments({subreddit:subreddit, postId:postId}));
-    },[dispatch, subreddit,postId]);
+        if(error === null){ dispatch(fetchComments({subreddit:subreddit, postId:postId}));}
+    },[dispatch, subreddit, postId, error]);
 
     return (
         <Page type={pageType} params={{subreddit:subreddit, postId:postId}} postIds={postIds} />
