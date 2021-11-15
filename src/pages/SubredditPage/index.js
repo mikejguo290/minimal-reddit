@@ -58,14 +58,6 @@ export function SubredditPage(){
         if (error === null ){
             dispatch(fetchPostsBySubreddits([subreddit]));
         }
-
-        if (error){
-            history.push({
-                pathname:"/error",
-                state:{ error: error}
-            }) // imperatively redirect to NotFoundPage. 
-        }
-
     },[error, subreddit, history, dispatch]);
    
     return (
