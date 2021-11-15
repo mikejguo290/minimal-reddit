@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { PageTemplate } from '../PageTemplate';
 import { Posts } from '../../features/Posts';
 import { Banner } from '../Banner';
@@ -37,7 +38,12 @@ export function Page(props){
 
            <PageTemplate>
                     { error
-                        ? <div className="errorMessage">{error.message}</div>
+                        ?<Redirect to={{
+                                pathname:'/error',
+                                state:{error: error}
+                            }}
+                        />
+                    
                         :<>
                             <Posts  pageType={type} postIds={postIds} /> 
                             { showNoSearchResults && <NoSearchResults/> }
