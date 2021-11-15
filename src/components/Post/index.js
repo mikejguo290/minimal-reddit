@@ -39,7 +39,12 @@ export function Post(props){
     const showResourceLink = urlIsImage === false && urlContainsPostId === false;
    
     // JSX elements to be rendered
-    const bodyImage = urlIsImage && <figure><img src={url} alt={`${subreddit_name_prefixed} - ${title}`} /></figure>;
+    const bodyImage = urlIsImage && (
+        <Link to={permalink || ''}>
+            <figure>
+                <img src={url} alt={`${subreddit_name_prefixed} - ${title}`} />
+            </figure>
+        </Link>);
     const redditVotes = convertNumberToStringThousands(votes);
     let bodyText;
     let resourceLink;
