@@ -81,6 +81,9 @@ const options = {
     reducers:{
         resetError:(state)=>{
             state.error = null;
+        },
+        clearPosts:(state)=>{
+            state.posts = [];
         }
     },
     extraReducers:{
@@ -124,7 +127,7 @@ const postsSlice = createSlice(options);
 export const selectPosts = state => state.posts.posts;
 export const selectIsLoadingStatus = state => state.posts.isLoading;
 export const selectPostsError = state => state.posts.error;
-export const { resetError } = postsSlice.actions;
+export const { resetError, clearPosts } = postsSlice.actions;
 export default postsSlice.reducer;
 
 

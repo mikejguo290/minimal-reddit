@@ -2,7 +2,7 @@ import React from 'react';
 import { Page } from '../../components/Page';
 import { useLayoutEffect } from 'react'
 import { useDispatch, useSelector  } from 'react-redux';
-import { fetchPostsBySubreddits , selectPosts } from '../../features/Posts/postsSlice';
+import { fetchPostsBySubreddits , selectPosts, clearPosts } from '../../features/Posts/postsSlice';
 import { selectSearch } from '../../features/Search/searchSlice';
 import { selectSubreddits } from '../../features/Subreddits/subredditsSlice';
 import { mixPosts } from '../../utils/helper'
@@ -17,14 +17,9 @@ export function Homepage(){
 
     const posts = useSelector(selectPosts);
     const searchTerm = useSelector(selectSearch);
-    const filteredPosts = posts.filter(post => {
-        if(searchTerm){
-            return post.title.toLowerCase().includes(searchTerm.toLowerCase())
-        }else{
-            return post;
-        }
-    });
-
+    const filteredPosts = posts.filter(post => searchTerm
+                                            ? post.title.toLowerCase().includes(searchTerm.toLowerCase()) 
+                                            : post);
     const postIds = mixPosts(filteredPosts);
 
     // effect runs on every render of Homepage. 
@@ -33,7 +28,13 @@ export function Homepage(){
     JSON.stringify(s) converts array into string of ["javascript","webdev","reactjs","learnprogramming","ProgrammerHumor"]
     which doesn't change until subredditList's contents actually change. 
     */
-    
+
+    useLayoutEffect(()=>{
+        // clear posts in store before loading. this is to attain a completely new set of posts on each home page load.
+        // fetchPostsBySubreddits doesn't fire if there is at least one post per subreddit. 
+        dispatch(clearPosts());
+    },[dispatch]);
+
     useLayoutEffect(()=>{
         // the effect (api call) introduces DOM mutations which change the appearance of the DOM between component first rendering (with old data) and when API call finishes (with new data).
         // useLayoutEffect differs from useEffect in that it runs before React paints.
