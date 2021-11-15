@@ -12,24 +12,40 @@ export const fetchPostsBySubreddits = createAsyncThunk(
     },{
         condition:(subreddits, {getState})=>{
             // two cases for cancellation
-            // 1. do not dispatch action if there are more than one post in store that belongs to the provided subreddit 
-            // 2. don't dispatch if just one post and the store's comment's postId doesn't match the one comment. 
-            // (this should deal with subreddits with just one post when I don't want to make another API call to repopulate store.)
-            // as opposed to if matchingPosts equal to one and comment matches post id (assuming this is store post data comes from landing on the url for that specific post first thing)
-            
-            const { posts } = getState();
-            const matchingPosts = posts.posts.filter(post => subreddits.includes(post.subreddit));
-            if(matchingPosts.length > 1 ){
-                return false;
-            }
+            // 1. dispatch action if store has one post and one matching comment.  
+            // don't otherwise. (assuming this is store post data comes from landing on the url for that specific post first thing, rather than subreddit with just one post);
+            // 2. dispatch action if not all subreddits have corresponding posts in store AND it's not case one. 
+            // don't dispatch otherwise
 
+            const { posts } = getState();
             const { comments } = getState(); // structure is  { postIdx: [comments of post x]}
+            
+            // case 1. if there are is just one subreddit. (more specific scenario comes first )
+            const matchingPosts = posts.posts.filter(post => subreddits.includes(post.subreddit));
+            
             // comments.comments returns the actual comments in store.
             const commentIds = Object.keys(comments.comments) // returns list of postIds 
             const commentMatchPost = posts.posts.find(post => post.id === commentIds[0] )? true: false;
-            if(matchingPosts.length===1 && commentMatchPost===false ){
+            if(matchingPosts.length===1){
+                if(commentMatchPost){
+                    // if just one matching post AND the comment matches the post, make api call.
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+            
+            // case 2. if all subs have at least one post AND there are more than one subreddits in call (dealt with in conditional above). don't make an API call. 
+            let postForEachSubreddit = subreddits.every(subreddit => {
+                // for every subreddit in list of subreddits, check if at least one post in store belong to that subreddit
+                const subredditPosts = posts.posts.filter(post => post.subreddit === subreddit); 
+                return subredditPosts.length >0;
+            });
+
+            if( postForEachSubreddit ){ //&& subreddits.length >1 
                 return false;
             }
+
         }
     }
 );
