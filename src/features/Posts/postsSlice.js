@@ -9,6 +9,28 @@ export const fetchPostsBySubreddits = createAsyncThunk(
         let mergedPosts=[]
         posts.forEach(subredditPosts => mergedPosts.push(...subredditPosts)); // merge list so that posts from each subreddit alternates. 
         return mergedPosts;
+    },{
+        condition:(subreddits, {getState})=>{
+            // two cases for cancellation
+            // 1. do not dispatch action if there are more than one post in store that belongs to the provided subreddit 
+            // 2. don't dispatch if just one post and the store's comment's postId doesn't match the one comment. 
+            // (this should deal with subreddits with just one post when I don't want to make another API call to repopulate store.)
+            // as opposed to if matchingPosts equal to one and comment matches post id (assuming this is store post data comes from landing on the url for that specific post first thing)
+            
+            const { posts } = getState();
+            const matchingPosts = posts.posts.filter(post => subreddits.includes(post.subreddit));
+            if(matchingPosts.length > 1 ){
+                return false;
+            }
+
+            const { comments } = getState(); // structure is  { postIdx: [comments of post x]}
+            // comments.comments returns the actual comments in store.
+            const commentIds = Object.keys(comments.comments) // returns list of postIds 
+            const commentMatchPost = posts.posts.find(post => post.id === commentIds[0] )? true: false;
+            if(matchingPosts.length===1 && commentMatchPost===false ){
+                return false;
+            }
+        }
     }
 );
 // returns post details from call to reddit json api for each individual post. 
@@ -25,8 +47,8 @@ export const fetchPostsBySubredditAndPostId = createAsyncThunk(
             // if there is already a post with the same id in store, cancel thunk BEFORE payload creator is called.
             // no action will be dispatched. 
             const {posts} = getState();
-            const matchingPost = posts.posts.filter(post => post.id === postId);
-            if(matchingPost.length > 0){
+            const matchingPosts = posts.posts.filter(post => post.id === postId);
+            if(matchingPosts.length > 0){
                 return false;
             }
         }
