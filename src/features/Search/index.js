@@ -1,7 +1,7 @@
 import React from 'react';
 import redditImage from '../../images/reddit.jpeg'; /* local imports */
 import { Link } from 'react-router-dom';
-import { setSearchTerm , selectSearch} from './searchSlice';
+import { clearSearchTerm, setSearchTerm , selectSearch} from './searchSlice';
 import { useDispatch, useSelector } from 'react-redux'
 
 export function Search (){
@@ -13,26 +13,19 @@ export function Search (){
         const userInput = event.target.value;
         dispatch(setSearchTerm(userInput));
     }
-
+    const handleClick = (event) =>{ // clear search button
+        dispatch(clearSearchTerm());
+    }
     const handleSubmit = (event) => {
         // ***** form submission is disabled! *****
         event.preventDefault();
     }
-
+    
     /* 
-
     // extra feature. implement submit searchTerm to filter and display list of results
     // rendered in a dedicated search results page. 
     // in reddit app. typing search brings up list of matching subreddits
     // submitting search result tells reddit app to search for posts. communities, subreddits etc. 
-    const handleSubmit = (event) =>{
-        event.preventDefault();
-        if(searchTerm){
-            console.log(searchTerm);
-            dispatch(submitSearchTerm(searchTerm));
-        }
-        setSearchTerm('');
-    }
     */
 
     return (
@@ -48,7 +41,12 @@ export function Search (){
             </Link>
             </div>
             <form onSubmit={handleSubmit} >
-                <input className="searchBar" placeholder='Search' value={searchTerm} onChange={handleChange} />
+                <input className="searchBar" type='text' placeholder='Search' value={searchTerm} onChange={handleChange} />
+                {
+                searchTerm
+                    ?<button className="clearSearch" onClick={handleClick}>X</button>
+                    :<></>
+                }
             </form>
         </header>
     )

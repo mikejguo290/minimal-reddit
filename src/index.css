@@ -136,6 +136,26 @@ header {
 
 header form {
   display: flex;
+  flex-direction:row;
+  border:1px solid grey;
+}
+input.searchBar { /* form input */
+  /* Tell the input to use all the available space */
+  flex-grow:2;
+  /* And hide the input's outline, so the form looks like the outline */
+  border:0;
+  background-color:ghostwhite;
+}
+
+input.searchBar:focus {
+  outline:none;
+}
+
+button.clearSearch{ /* clear search button */
+  border:1px solid #FF5700;
+  background:#FF5700;
+  color:ghostwhite;
+  font-weight:bold;
 }
 .brand {
   display:flex;
