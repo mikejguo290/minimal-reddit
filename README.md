@@ -72,18 +72,18 @@ From initial wireframe to finalized app.
 Clone this repo and run npm install to install dependencies. 
 
 ## Project Status
-Actively working on conducting Unit, Integration and End-To-End Testing.
+Actively working on writing Unit, Integration and End-To-End tests for the app.
 ## Room for Improvement
-- Allow user to specify sort order for fetched posts and force a refresh.
-- Allow user to search for, add and subtract subreddits.
+- Allow user to specify sort order for fetched posts.
+- Allow user to search for, add and delete subreddits.
 - Create a dedicated search page to allow user to search for posts.
 - Fetch and display more than the top layer of comments per post.
 - Implement user authentication.
 - Allow user to upvote or downvote posts and comments.
-- Implement Dark Mode
+- Implement Dark Mode.
 
 ## Acknowledgements
-- Many thanks to Joseph Mawa for the Freecodecamp's article on how to use serverless Netlify functions to access external APIs and secure API secrets. https://www.freecodecamp.org/news/how-to-access-secret-api-keys-using-netlify-functions-in-a-react-app/
-
+- Many thanks to Laith Harb for his series on React Testing Library for introducing me to testing react components. 
+https://www.youtube.com/channel/UCyLNhHSiEVkVwPSFKxJAfSA
 ## Contact
 Created by Mike Guo - feel free to contact me at mikejguo290@hotmail.com or on GitHub!
