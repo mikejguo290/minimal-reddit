@@ -223,6 +223,10 @@ button.clearSearch{ /* clear search button */
   overflow-wrap:break-word;
 }
 
+.posts a {
+  overflow-wrap: anywhere;
+}
+
 .postsList {
   list-style:none;
   margin-block-start: 0em;
