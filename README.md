@@ -1,6 +1,6 @@
 # Minimal Reddit
 > This is a Reddit reader app which allows the user to browse top posts this month, from a select number of subreddits. The data for the app comes from the reddit.json API. The pared back design aims to create a minimalist user experience free from distrations.
-> Live demo [_here_](https://inspirational-todo-list.netlify.app/). <!-- If you have the project hosted somewhere, include the link here. -->
+> Live demo [_here_](https://minimal-reddit.netlify.app/). <!-- If you have the project hosted somewhere, include the link here. -->
 
 ## Table of Contents
 * [General Info](#general-information)
