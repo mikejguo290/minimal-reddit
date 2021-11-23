@@ -65,9 +65,9 @@ The project  React/Redux development process:
 ## Screenshots
 From initial wireframe to finalized app.
 
-![Wireframe screenshot](./images/wireframe_screenshot.png)
+![Wireframe screenshot](./images/wireframes.png)
 
-![Finished app screenshot](./images/app_screenshot.png)
+![Mobile screenshot](./images/mobile_screenshot.png) ![Laptop screenshot](./images/laptop_screenshot.png)
 ## Setup
 Clone this repo and run npm install to install dependencies. 
 
@@ -80,8 +80,8 @@ Actively working on writing Unit, Integration and End-To-End tests for the app.
 - Fetch and display more than the top layer of comments per post.
 - Implement user authentication.
 - Allow user to upvote or downvote posts and comments.
+- Navigation buttons like 'scroll back to top' and 'go to homepage'
 - Implement Dark Mode.
-
 ## Acknowledgements
 - Many thanks to Laith Harb for his series on React Testing Library for introducing me to testing react components. 
 https://www.youtube.com/channel/UCyLNhHSiEVkVwPSFKxJAfSA
