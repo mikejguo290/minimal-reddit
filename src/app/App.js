@@ -7,12 +7,14 @@ import { BrowserRouter as Router , Route, Switch } from 'react-router-dom';
 import { NotFoundPage } from '../pages/NotFoundPage';
 import store from './store';
 import { Provider } from 'react-redux';
+import ScrollToTop from '../components/ScrollToTop';
 
 function App() {
   return (
     <>
       <Provider store={store}>
         <Router>
+          <ScrollToTop />
           <Search />
           <Switch>
             <Route path="/r/:subreddit/comments/:postId">
