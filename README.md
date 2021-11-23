@@ -67,7 +67,7 @@ From initial wireframe to finalized app.
 
 ![Wireframe screenshot](./src/images/wireframes.png)
 
-![Mobile screenshot](./src/images/mobile_screenshot.png) ![Laptop screenshot](./images/laptop_screenshot.png)
+![Mobile screenshot](./src/images/mobile_screenshot.png) ![Laptop screenshot](./src/images/laptop_screenshot.png)
 ## Setup
 Clone this repo and run npm install to install dependencies. 
 
