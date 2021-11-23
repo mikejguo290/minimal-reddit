@@ -223,10 +223,6 @@ button.clearSearch{ /* clear search button */
   overflow-wrap:break-word;
 }
 
-.posts a {
-  overflow-wrap: anywhere;
-}
-
 .postsList {
   list-style:none;
   margin-block-start: 0em;
@@ -240,6 +236,22 @@ button.clearSearch{ /* clear search button */
   margin: 1em 0em;
   background-color:white;
   box-shadow: 0 3px 10px 1px rgb(0 0 0 / 0.2);
+}
+
+.post a {
+  overflow-wrap: anywhere;
+}
+
+pre code {
+  /* white-space and overflow-wrap together prevents code contents over flowing*/
+  display: block;
+  background: none;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  overflow-x: scroll;
+  max-width: 100%;
+  min-width: 100px;
+  padding: 0;
 }
 
 .postVotes {
