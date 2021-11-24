@@ -61,6 +61,8 @@ The project  React/Redux development process:
 
 ## Usage
 
+#### Click anywhere on the video below to play the demo
+
 https://user-images.githubusercontent.com/4690014/143149896-8b112b17-07d6-4897-823c-cc937c6d8314.mov
 
 <!-- If you have screenshots you'd like to share, include them here. -->
