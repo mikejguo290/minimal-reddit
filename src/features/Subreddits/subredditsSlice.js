@@ -1,5 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// access subreddit details at https://www.reddit.com/r/subreddit_name/about.json
+// parse data, especially community_icon to include the string to the left of '?'
+// https://styles.redditmedia.com/t5_2qs0q/styles/communityIcon_kxcmzy9bt1381.jpg?width=256&amp;s=4daf7298776111d25a50c359914d9cfaa1c10e94
 const sub1 = {
     name:'javascript', /* subreddit display_name */
     display_name_prefixed: "r/javascript",
@@ -11,7 +14,7 @@ const sub2 = {
     name:'webdev',
     display_name_prefixed: "r/webdev",
     id:'t5_2qs0q', 
-    community_icon:'https://styles.redditmedia.com/t5_2qs0q/styles/communityIcon_5ey8lzmwmxp21.png',
+    community_icon:'https://styles.redditmedia.com/t5_2qs0q/styles/communityIcon_kxcmzy9bt1381.jpg',
     icon_img:'',
 }
 
